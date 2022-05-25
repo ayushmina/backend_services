@@ -22,7 +22,7 @@ const appId ="1121036925455124";
 const appSecret = "3912a21a8b19b58968f4b2a44cbb862d";
 
 const redirectURI = "auth/google"
-const SERVER_ROOT_URI="http://localhost:8080"
+const SERVER_ROOT_URI="https://authprojectseraphic.herokuapp.com"
 const oauth2Client = new google.auth.OAuth2(
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
@@ -30,12 +30,12 @@ const oauth2Client = new google.auth.OAuth2(
    * This is where Google will redirect the user after they
    * give permission to your application
    */
-  `http://localhost:8080/auth/google`,
+  `https://authprojectseraphic.herokuapp.com/auth/google`,
 );
 function getGoogleAuthURL() {
     const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
     const options = {
-        redirect_uri: `http://localhost:8080/auth/google`,
+        redirect_uri: `https://authprojectseraphic.herokuapp.com/auth/google`,
         client_id: GOOGLE_CLIENT_ID,
         access_type: 'offline',
         response_type: 'code',
@@ -136,7 +136,7 @@ app.get('/', (req, res) => {
     <html>
       <body>
         <a href="https://www.facebook.com/v6.0/dialog/oauth?client_id=${appId}&r
-edirect_uri=${encodeURIComponent('http://localhost:8080/oauth-redirect')}">
+edirect_uri=${encodeURIComponent('https://authprojectseraphic.herokuapp.com/oauth-redirect')}">
           Log In With Facebook
         </a>
       </body>
@@ -151,7 +151,7 @@ app.get('/oauth-redirect', async (req, res) => {
     const accessTokenUrl = 'https://graph.facebook.com/v6.0/oauth/access_token?' +
       `client_id=${appId}&` +
       `client_secret=${appSecret}&` +
-      `redirect_uri=${encodeURIComponent('http://localhost:8080/oauth-redirect')}&` +
+      `redirect_uri=${encodeURIComponent('https://authprojectseraphic.herokuapp.com/oauth-redirect')}&` +
       `code=${encodeURIComponent(authCode)}`;
 
     const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
