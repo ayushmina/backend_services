@@ -165,7 +165,7 @@ app.get('/oauth-redirect', async (req, res) => {
   }
 });
 app.get('/me', async (req, res) => {
-  try {
+  try { 
     const accessToken = req.query.accessToken;
     if (!accessTokens.has(accessToken)) {
       throw new Error(`Invalid access token "${accessToken}"`);
