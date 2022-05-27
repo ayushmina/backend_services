@@ -19,6 +19,8 @@
     "googleapis": "^100.0.0",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.16",
-    "querystring": "^0.2.1"
+    "querystring": "^0.2.1",
+    "request": "^2.88.2",
+    "twitter-api-v2": "^1.12.2"
   }
 }
