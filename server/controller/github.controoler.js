@@ -12,15 +12,13 @@ exports.getGithubData = async (req, res) => {
         const requestToken = req.query.code;
         let access_token;  
         axios({method: 'post', url: `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${requestToken}`,
-            headers: { accept: 'application/json'
-}
+            headers: { accept: 'application/json'}
         }).then((response) => {
             access_token = response.data.access_token
             axios({method: 'get',url: `https://api.github.com/user`,
-                headers: {
-                    Authorization: 'token ' + access_token
-                }
+            headers: { Authorization: 'token ' + access_token}
             }).then((response) => {
+  
             return universalFunctions.sendSuccess(
             {
                 statusCode: 200,

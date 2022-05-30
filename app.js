@@ -10,10 +10,10 @@ const url = "mongodb://localhost:27017/authSeraphic";
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true }, (error) => {
   console.log("connection error", error)});
 
-app.use("/facebook", facebookRoutes);
+app.use("/auth/facebook", facebookRoutes);
 app.use("/auth", googleRoutes);
 app.use("/auth/github", githubRoutes);
-app.use("/auth1",instagramRoutes)
+app.use("/auth/instagram",instagramRoutes)
 
 
 
