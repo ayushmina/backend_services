@@ -7,7 +7,8 @@ const querystring = require('querystring');
 const googleService = require("../services/google.service")
 const universalFunctions= require("../utils/unversalFunction")
 const models = require("../models")
-const appConstants=require("../utils/appConstants")
+const appConstants = require("../utils/appConstants")
+const responseMessages=require("../resources/resources.json")
 const GOOGLE_CLIENT_ID =config.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = config.GOOGLE_CLIENT_SECRET;
 const redirectURI = config.redirectURI;
@@ -24,7 +25,7 @@ module.exports = {
     try {
       const code = req.query.code;
       if (!code) {
-        res.send({ message: "Code Is Not Found" })
+        res.send({ message: responseMessages.CODE_NOT_FOUND })
       }
       const { id_token, access_token } = await googleService.getGooleAccessTokens({
         code, clientId: GOOGLE_CLIENT_ID, clientSecret: GOOGLE_CLIENT_SECRET,
@@ -54,14 +55,13 @@ module.exports = {
       return universalFunctions.sendSuccess(
         {
           statusCode: 200,
-          message: "Success",
+          message: responseMessages.SUCCESS,
         },
         res
       );
     }
     catch (error) {
-      res.status(500).send(error)
-      // return universalFunctions.sendError(error, res)
+      return universalFunctions.sendError(error, res)
     } 
   }
 }

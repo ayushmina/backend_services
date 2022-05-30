@@ -1,5 +1,6 @@
 const Boom =require("boom");
-const Joi =require("@hapi/joi");
+const Joi = require("@hapi/joi");
+const responseMessages=require("../resources/resources.json")
 // import responseMessages from "../resources/response.json";
 const  { JsonWebTokenError } =require("jsonwebtoken");
 // import 'regenerator-runtime/runtime'

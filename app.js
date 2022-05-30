@@ -8,13 +8,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const { facebookRoutes, googleRoutes, githubRoutes, instagramRoutes } = require("./server/routes");
 const url = "mongodb://localhost:27017/authSeraphic";
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true }, (error) => {
-  console.log("connection error", error)});
-
+  console.log("connection error", error)
+});
+  
 app.use("/auth/facebook", facebookRoutes);
 app.use("/auth", googleRoutes);
 app.use("/auth/github", githubRoutes);
 app.use("/auth/instagram",instagramRoutes)
-
 
 
 app.listen(PORT, () => {

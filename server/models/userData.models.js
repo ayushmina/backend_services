@@ -18,7 +18,7 @@ const userDataSchema = new Schema(
     },
     loginType: {
       type: String,
-      enum: [appConstants.googleLoginIn],
+      enum: [appConstants.googleLoginIn,appConstants.githubLogIn],
     }
   },
   { timestamps: true }
