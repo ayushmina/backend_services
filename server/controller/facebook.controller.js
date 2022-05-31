@@ -34,6 +34,7 @@ exports.getOauth = async (req, res) => {
   //       `client_secret=${appSecret}&` +
   //       `redirect_uri=${encodeURIComponent(`/oauth-redirect`)}&` +
   //       `code=${encodeURIComponent(authCode)}`;
+  console.log("accessTokenUrl",accessTokenUrl)
       const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
       accessTokens.add(accessToken);
       res.redirect(`/me?accessToken=${encodeURIComponent(accessToken)}`);
