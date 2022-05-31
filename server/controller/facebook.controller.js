@@ -37,6 +37,7 @@ exports.getOauth = async (req, res) => {
   console.log("accessTokenUrl",accessTokenUrl)
       const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
       accessTokens.add(accessToken);
+      console.log(accessToken,"accessToken");
       res.redirect(`/auth/facebook/me?accessToken=${encodeURIComponent(accessToken)}`);
   //   } catch (err) {
   //      console.log(err);
@@ -51,9 +52,9 @@ exports.getOauth = async (req, res) => {
 exports.getToken= async (req, res) => {
   try { 
     const accessToken = req.query.accessToken;
-    if (!accessTokens.has(accessToken)) {
-      throw new Error(`Invalid access token "${accessToken}"`);
-    }
+    // if (!accessTokens.has(accessToken)) {
+    //   throw new Error(`Invalid access token "${accessToken}"`);
+    // }
     let data = await axios.get(`https://graph.facebook.com/me?access_token=${encodeURIComponent(accessToken)}`).
       then(res => {return res});
       console.log(data)
