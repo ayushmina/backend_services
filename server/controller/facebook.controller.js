@@ -28,15 +28,15 @@ exports.getOauth = async (req, res) => {
     {
       res.send({messge:"authCode Is Not Found"})
     }
-   facebookServices.generateAccessToken(authCode)
+    const accessTokenUrl=  facebookServices.generateAccessToken(authCode)
   //     const accessTokenUrl = 'https://graph.facebook.com/v6.0/oauth/access_token?' +
   //       `client_id=${appId}&` +
   //       `client_secret=${appSecret}&` +
   //       `redirect_uri=${encodeURIComponent(`/oauth-redirect`)}&` +
   //       `code=${encodeURIComponent(authCode)}`;
-  //     const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
-  //     accessTokens.add(accessToken);
-  //     res.redirect(`/me?accessToken=${encodeURIComponent(accessToken)}`);
+      const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
+      accessTokens.add(accessToken);
+      res.redirect(`/me?accessToken=${encodeURIComponent(accessToken)}`);
   //   } catch (err) {
   //      console.log(err);
   //      return res.status(500).json({ message: err.response.data || err.message });
