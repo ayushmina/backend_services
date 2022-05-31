@@ -12,7 +12,7 @@ function generateAccessToken(authCode) {
       `redirect_uri=${encodeURIComponent(`${SERVER_ROOT_URI}/auth/facebook/oauth-redirect`)}&` +
       `code=${encodeURIComponent(authCode)}`;
     const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
-    accessTokens.add(accessToken);
+    // accessTokens.add(accessToken);
     res.redirect(`/me?accessToken=${encodeURIComponent(accessToken)}`);
     } catch (error) {
       reject(error);
