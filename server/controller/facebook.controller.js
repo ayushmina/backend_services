@@ -37,7 +37,7 @@ exports.getOauth = async (req, res) => {
   console.log("accessTokenUrl",accessTokenUrl)
       const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
       accessTokens.add(accessToken);
-      res.redirect(`/me?accessToken=${encodeURIComponent(accessToken)}`);
+      res.redirect(`/auth/facebook/me?accessToken=${encodeURIComponent(accessToken)}`);
   //   } catch (err) {
   //      console.log(err);
   //      return res.status(500).json({ message: err.response.data || err.message });
