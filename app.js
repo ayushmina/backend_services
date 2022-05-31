@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 const { facebookRoutes, googleRoutes, githubRoutes, instagramRoutes } = require("./server/routes");
-const url = "mongodb://localhost:27017/authSeraphic";
+const url = "mongodb+srv://ayushmeena:ayushmeena@cluster0.h8xj46a.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true }, (error) => {
   console.log("connection error", error)
 });

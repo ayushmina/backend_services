@@ -9,7 +9,7 @@ function generateAccessToken(authCode) {
     const accessTokenUrl = 'https://graph.facebook.com/v6.0/oauth/access_token?' +
       `client_id=${appId}&` +
       `client_secret=${appSecret}&` +
-      `redirect_uri=${encodeURIComponent(`/oauth-redirect`)}&` +
+      `redirect_uri=${encodeURIComponent(`auth/facebook/oauth-redirect`)}&` +
       `code=${encodeURIComponent(authCode)}`;
     const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
     accessTokens.add(accessToken);

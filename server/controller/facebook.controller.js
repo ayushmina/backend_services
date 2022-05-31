@@ -5,6 +5,7 @@ const facebookServices=require("../services/facebook")
 const appId =config.appId;
 const appSecret = config.appSecret;
 const SERVER_ROOT_URI = config.SERVER_ROOT_URI;
+const accessTokens = new Set();
 exports.fbLink = (req, res) => {
   res.send(`
     <html>
@@ -61,6 +62,7 @@ exports.getToken= async (req, res) => {
       </html>
     `);
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ message: err.response.data || err.message });
   }
 }
