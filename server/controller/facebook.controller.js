@@ -11,7 +11,7 @@ exports.fbLink = (req, res) => {
       <body>
       <div>
       <span>
-        <a href="https://www.facebook.com/v6.0/dialog/oauth?client_id=${appId}&redirect_uri=${encodeURIComponent(`${SERVER_ROOT_URI}/oauth-redirect`)}"> Log In With Facebook
+        <a href="https://www.facebook.com/v6.0/dialog/oauth?client_id=${appId}&redirect_uri=${encodeURIComponent(`${SERVER_ROOT_URI}auth/facebook/oauth-redirect`)}"> Log In With Facebook
         </a>
         </span>
         </div>

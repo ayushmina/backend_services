@@ -6,7 +6,16 @@ const userDataSchema = new Schema(
     userId: {
       type:Number,
     },
-      userName: {
+    FirstName: {
+      type: String,
+    },
+    lastName: {
+      type: String,
+    },
+    phoneNumber: {
+      type: String,
+    },
+    countryCode: {
       type: String,
     },
     email: {
@@ -16,9 +25,111 @@ const userDataSchema = new Schema(
     profilePic: {
       type: String,
     },
+    firebaseUID: {
+      type: String,
+    },
     loginType: {
       type: String,
-      enum: [appConstants.googleLoginIn,appConstants.githubLogIn],
+      enum: [appConstants.firebaseLogin,appConstants.googleLoginIn,appConstants.githubLogIn,appConstants.facebookLogin,appConstants.instagramLogin,appConstants.twitterLogin],
+    },
+    googleJson: {
+      type: Object,
+      googleId: {
+        type: String
+      },
+      firstName: {
+        type: String
+      },
+      lastName: {
+        type: String
+      },
+      profilePic: {
+        type: String
+      },
+      email:{
+        type: String
+      }
+    },
+    facebookJson: {
+      type: Object,
+      facebookId: {
+        type: String
+      },
+      firstName: {
+        type: String
+      },
+      lastName: {
+        type: String
+      },
+      profilePic: {
+        type: String
+      },
+      email:{
+        type: String
+      },
+      phoneNumber:{
+        type: String
+      }
+    },
+    instagramJson: {
+      type: Object,
+      instagramId: {
+        type: String
+      },
+      firstName: {
+        type: String
+      },
+      lastName: {
+        type: String
+      },
+      profilePic: {
+        type: String
+      },
+      email:{
+        type: String
+      },
+
+    },
+    githubJson: {
+      type: Object,
+      githubId: {
+        type: String
+      },
+      firstName: {
+        type: String
+      },
+      lastName: {
+        type: String
+      },
+      profilePic: {
+        type: String
+      },
+    
+    },
+    twitterJson: {
+      type: Object,
+      twitterId: {
+        type: String
+      },
+      firstName: {
+        type: String
+      },
+      lastName: {
+        type: String
+      },
+      profilePic: {
+        type: String
+      },
+      email:{
+        type: String
+      },
+    },
+    deviceToken: {
+      type: String,
+    },
+    deviceType:{
+      type: String,
+      enum:[appConstants.deviceType_android,appConstants.deviceType_apple,appConstants.deviceType_website]
     }
   },
   { timestamps: true }

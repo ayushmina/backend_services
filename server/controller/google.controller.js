@@ -41,6 +41,7 @@ module.exports = {
       });
       const token = jwt.sign(googleUser, config.jwtConfig);
       const userData = jwt.verify(token, config.jwtConfig)
+      console.log("userData",userData);
       let isExits = await models.userSchema.findOne({ email: userData.email })
       let payload = {
         userId: userData.id,
