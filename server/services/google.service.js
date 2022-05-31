@@ -10,7 +10,7 @@ function getGooleAccessTokens({
   clientSecret,
   redirectUri,
 }) {
-    const url = 'https://oauth2.googleapis.com/token';
+ const url = 'https://oauth2.googleapis.com/token';
   const values = {
     code,
     client_id: clientId,

@@ -12,7 +12,7 @@ mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true }, (erro
 });
   
 app.use("/auth/facebook", facebookRoutes);
-app.use("/auth", googleRoutes);
+app.use("/auth/google", googleRoutes);
 app.use("/auth/github", githubRoutes);
 app.use("/auth/instagram",instagramRoutes)
 
