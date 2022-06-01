@@ -39,3 +39,16 @@ exports.googleLogInSignUp = async (req, res) => {
     }
 }
 
+// userData {
+//   id: '113733561649532710734',
+//   email: 'test.seraphic15@gmail.com',
+//   verified_email: true,
+//   name: 'Test Seraphic',
+//   given_name: 'Test',
+//   family_name: 'Seraphic',
+//   picture: 'https://lh3.googleusercontent.com/a/AATXAJz3Q2PxCDZZ1f-ygxsgRyaOe3rt2WnldTd0Mv0=s96-c',
+//   locale: 'en-GB',
+//   iat: 1653993843
+// }
+
+// google Response
