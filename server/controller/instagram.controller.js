@@ -30,7 +30,7 @@ module.exports = {
                     console.log(user,"user inside redirectUriRoutes ")
                     // res.send({ data: user })
 
-                    let userInfo= await getUserInfo(user.access_token);
+                    let userInfo= await getUserInfo.getUserInfo(user.access_token);
                     console.log(userInfo)
                 } else {
                     console.log(error, "error");
