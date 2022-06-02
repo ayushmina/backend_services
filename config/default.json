@@ -1,0 +1,57 @@
+{
+    "port": 8080,
+    "log": {
+      "level": "info",
+      "filename": "app.log"
+    },
+    "db": {
+      "databaseUrl": "mongodb+srv://ayushmeena:ayushmeena@cluster0.h8xj46a.mongodb.net/?retryWrites=true&w=majority",
+      "firebaseDatabaseUrl": ""
+    },
+    "hashLength": 10,
+    "adminPassword": "tribu",
+    "adminEmail": "admin@tribu.com",
+    "jwt": {
+      "secret": "seraphic",
+      "tokenExpire": 120
+    },
+    "stripe": {
+      "secretKey": "sk_test_51IpZAyEth7CdLPjsexB0UsL1TTETaLvFVXyQRHlH4I4eeO2jJ1JRfTIKitos4iDY3YIVyDgbPjPNj8zKiyViZQjt0080CogEid"
+    },
+    "sdkLocation": "../../tribu-c5814-firebase-adminsdk-700lq-2618acd11e.json",
+    "sessionManager": {
+      "webMultiSession": true,
+      "deviceMultiSession": true,
+      "adminTokenExpireTime": 120,
+      "userTokenExpireTime": 0
+    },
+
+    "SERVER_ROOT_URI": "http://localhost:8080",
+
+  "googleKey": {
+     "GOOGLE_CLIENT_ID":"192073990165-k8uk1edbbhb0lm03lqb7ikvf3ibqotr5.apps.googleusercontent.com",
+      "GOOGLE_CLIENT_SECRET" :"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",
+     "redirectURI" : "auth/google/google"},
+   
+   "facebookKey":{
+   "appId" : "1121036925455124",
+   "appSecret": "3912a21a8b19b58968f4b2a44cbb862d"
+  },
+   
+   "instagramKey":{
+     "CLIENTID":"400001152024284",
+     "client_secret":"b7ea1a9d0b7b72041220a97735080be3"
+   },
+   "jwtConfig": "rohitkumardddd",
+   "githubKey":{
+   "GITHUB_CLIENT_ID": "bda2e362514f5a62ec89",
+   "GITHUB_CLIENT_SECRET":"d1390957d6158d46888cc8af9696e76f8d8795d1"
+  },
+
+  "twitterKey": {
+   "Twitter_API_Key": "jjYZZBSGPgYEEq44gfCvZ8KFv",
+   "Twitter_API_SECRET":"YbxrCI3eMKZtMxDhlPYPC8rnwnE32XYAy1mSgE4XVpT3exRMiD",
+  "Twitter_Bearer_Token":"AAAAAAAAAAAAAAAAAAAAAB%2FidAEAAAAA3eaBvnCrOenuBecieoTHeOFXcW0%3DOoHOwqiemVWoa2kC5PqHcWYea0JPHNqcOyqq1R0M08CiquruG5"
+  }
+  
+}

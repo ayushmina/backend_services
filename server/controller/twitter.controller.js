@@ -9,13 +9,10 @@ const {
 const fs = require('fs');
 
 var token_twitter_access_Token=[];
-  // app.get('/twitter/authenticate', twitter('authenticate'))
-  // app.get('/twitter/authorize', twitter('authorize'))
   exports.twitter = (method = 'authorize')=> {
     return async (request, reply) => {
 
       const { oauthRequestToken, oauthRequestTokenSecret } = await getOAuthRequestToken()
-      
       console.log(oauthRequestToken)
       req.session = req.session || {}
       request.session.oauthRequestToken = oauthRequestToken
@@ -36,13 +33,11 @@ var token_twitter_access_Token=[];
       request.session.oauthRequestTokenSecret = oauthRequestTokenSecret
       token_twitter_access_Token.push({oauthRequestToken:oauthRequestToken,oauthRequestTokenSecret:oauthRequestTokenSecret});
       const authorizationUrl = `https://api.twitter.com/oauth/authenticate?oauth_token=${oauthRequestToken}`
-      // ?oauthRequestToken=${oauthRequestToken}?oauthRequestTokenSecret=${oauthRequestTokenSecret}
       console.log('redirecting user to ', authorizationUrl)
       console.log(token_twitter_access_Token)
         reply.redirect(authorizationUrl)
   }
 
-//   app.get('/twitter/callback', async (request, reply) => {
     exports.twitterCallback = async (request, reply) => {
       try{
       let oauthRequestToken, oauthRequestTokenSecret;

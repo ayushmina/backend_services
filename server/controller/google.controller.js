@@ -1,22 +1,25 @@
-const config=require("../../config");
+// const config=require("../../config");
 const axios = require("axios")
 const jwt = require("jsonwebtoken");
-const cors =require("cors");
 const { google } = require('googleapis');
-const querystring = require('querystring');
 const googleService = require("../services/google.service")
 const universalFunctions= require("../utils/unversalFunction")
 const models = require("../models")
 const appConstants = require("../utils/appConstants")
-const responseMessages=require("../resources/resources.json")
-const GOOGLE_CLIENT_ID =config.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET = config.GOOGLE_CLIENT_SECRET;
-const redirectURI = config.redirectURI;
-const SERVER_ROOT_URI = config.SERVER_ROOT_URI;
- new google.auth.OAuth2(GOOGLE_CLIENT_ID,
-  GOOGLE_CLIENT_SECRET,
-  `${SERVER_ROOT_URI}/auth/google`,
+const responseMessages=require("../resources/resources.json");
+const config =require("config");
+const googleKey=config.get("googleKey")
+
+const GOOGLE_CLIENT_ID =googleKey.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = googleKey.GOOGLE_CLIENT_SECRET;
+const redirectURI = googleKey.redirectURI;
+const SERVER_ROOT_URI = config.get("SERVER_ROOT_URI");
+ new google.auth.OAuth2(
+   GOOGLE_CLIENT_ID,
+   GOOGLE_CLIENT_SECRET,
+   `${SERVER_ROOT_URI}/${redirectURI}`,
 );
+console.log( `${SERVER_ROOT_URI}/${redirectURI}`)
 module.exports = {
   getGoogleAuthUR: async (req, res) => {
     return res.redirect(googleService.getGoogleAuthURL());

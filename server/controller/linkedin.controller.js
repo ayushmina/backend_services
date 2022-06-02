@@ -1,3 +1,36 @@
+
+exports.getValidatedWithLinkedinUser=async (code, redirectUri) => {
+    const body = new URLSearchParams({
+      grant_type: 'authorization_code',
+      code,
+      redirect_uri: redirectUri,
+      client_id: process.env.LINKEDIN_CLIENT_ID,
+      client_secret: process.env.LINKEDIN_CLIENT_SECRET
+    })
+    const { access_token } = await fetchJSON(LINKEDIN_TOKEN, {
+      method: 'POST',
+      body
+    })
+    const payload = {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${access_token}` }
+    }
+    const { localizedFirstName, localizedLastName } = await fetchJSON(
+      LINKEDIN_NAME,
+      payload
+    )
+    const userData = {
+      name: `${localizedFirstName} ${localizedLastName}`
+    }
+    const response = await fetchJSON(LINKEDIN_EMAIL, payload)
+    if (response.elements) {
+      userData.email = response.elements[0]['handle~'].emailAddress
+    }
+
+    return userData
+  }
+
+
 // exports.loginWithLinkedin = async (req, res, next) => {
 //     try {
 //         const { token } = req.body
@@ -35,35 +68,3 @@
 //         res.send({message:error})
 //     }
 // }
-exports.getValidatedWithLinkedinUser=async (code, redirectUri) => {
-    const body = new URLSearchParams({
-      grant_type: 'authorization_code',
-      code,
-      redirect_uri: redirectUri,
-      client_id: process.env.LINKEDIN_CLIENT_ID,
-      client_secret: process.env.LINKEDIN_CLIENT_SECRET
-    })
-    const { access_token } = await fetchJSON(LINKEDIN_TOKEN, {
-      method: 'POST',
-      body
-    })
-    const payload = {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${access_token}` }
-    }
-    const { localizedFirstName, localizedLastName } = await fetchJSON(
-      LINKEDIN_NAME,
-      payload
-    )
-    const userData = {
-      name: `${localizedFirstName} ${localizedLastName}`
-    }
-    const response = await fetchJSON(LINKEDIN_EMAIL, payload)
-    if (response.elements) {
-      userData.email = response.elements[0]['handle~'].emailAddress
-    }
-
-    return userData
-  }
-
-

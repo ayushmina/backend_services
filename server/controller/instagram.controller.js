@@ -1,14 +1,17 @@
-const express = require('express');
-const axios = require("axios")
-const {stringify}= require('qs');
-const CLIENTID="400001152024284";
-const YOUR_REDIRECT_URI="https://authprojectseraphic.herokuapp.com/auth/instagram/instagram";
-const client_secret="b7ea1a9d0b7b72041220a97735080be3";
 var httpRequest = require('request');
 let getUserInfo= require("./../services/instragram");
+const config = require('config');
+const instragramKey=config.get("instagramKey");
+const CLIENTID=instragramKey.CLIENTID;
+const client_secret=instragramKey.client_secret;
+const YOUR_REDIRECT_URI=config.get("SERVER_ROOT_URI")+"/auth/instagram/instagram";
 module.exports = {
     getInstagramAuthURL: async (req, res) => {
-   var url =`https://api.instagram.com/oauth/authorize?client_id=`+CLIENTID+`&redirect_uri=`+YOUR_REDIRECT_URI+`&scope=user_profile,user_media&response_type=code`
+   var url =`https://api.instagram.com/oauth/authorize?client_id=`
+            +CLIENTID+`&redirect_uri=`
+            +YOUR_REDIRECT_URI
+            +`&scope=user_profile,user_media&response_type=code`
+
         res.redirect(url);
     },
     redirectUriRoutes: async (req, res) => {
@@ -46,6 +49,8 @@ module.exports = {
     },
   }
 
+  // const YOUR_REDIRECT_URI="https://authprojectseraphic.herokuapp.com/auth/instagram/instagram";
+
 //   try{
 //     let   response1 = await axios.get("https://graph.instagram.com/me", {
 //           params: {
@@ -72,7 +77,7 @@ module.exports = {
 //       }
 
 
-// data: {
+//      data: {
 //      id: '4954274331366031',
 //      username: 'lucy_thesiberianhusky',
 //      media_count: 20,

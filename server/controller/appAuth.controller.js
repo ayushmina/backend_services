@@ -1,42 +1,145 @@
-const axios = require("axios");
-const { response } = require("express");
-const config = require("../../config");
 const models = require("../models")
 const appConstants = require("../utils/appConstants")
 const responseMessages=require("../resources/resources.json")
 const  universalFunctions =require("../utils/unversalFunction");
 const Joi=require("joi");
-const {jwtGeneratorApp}=require("../utils/JwtFunctions");
+const {jwtAppTokenGenerator}=require("../utils/JwtFunctions");
 exports.googleLogInSignUp = async (req, res) => {
     try {
         const schema = Joi.object().keys({
-            googleJson: Joi.object().required(),
             firebaseUID: Joi.string().required(),
-            loginType:Joi.string().required(),
             email:Joi.string().required(),
-            FirstName:Joi.string().required(),
+            firstName:Joi.string().required(),
             lastName:Joi.string().required(),
             profilePic:Joi.string().allow(""),
             deviceType: Joi.string(),
             deviceToken: Joi.string().allow(""),
           });
-          await universalFunctions.validateRequestPayload(req.body, res, schema);
-          let userData=await models.userSchema.create(req.body);
-          let token =jwtGeneratorApp(userData._id,req.body.deviceType,req.body.deviceToken);
+          let payload=req.body;
+          payload.loginType=appConstants.googleConstants.googleLoginInType;
+          await universalFunctions.validateRequestPayload(payload, res, schema);
+          let userExist=await models.userSchema.findOne({firebaseUID:payload.firebaseUID});
+          if(userExist){
+           
+          let token =jwtAppTokenGenerator(userExist._id,req.body.deviceType,req.body.deviceToken);
+            universalFunctions.sendSuccess(
+              {
+                statusCode: 200,
+                message: responseMessages.LOGIN_SUCCESSFULLY,
+                 data: { token, userExist },
+
+              },
+              res
+            );
+          }else{
+          let userData=await models.userSchema.create(payload);
+          let token =jwtAppTokenGenerator(userData._id,req.body.deviceType,req.body.deviceToken);
           universalFunctions.sendSuccess(
             {
               statusCode: 200,
-              message: responseMessages.SUCCESS,
+              message: responseMessages.USER_CREATED_SUCCESSFULLY,
               data: { token, userData },
             },
             res
           );
-
+          }
     }
     catch (error)
     {
       return universalFunctions.sendError(error, res)
     }
+}
+
+exports.instagramLogInSignUp = async (req, res) => {
+  try {
+      const schema = Joi.object().keys({
+          firebaseUID: Joi.string().required(),
+          firstName:Joi.string().required(),
+          lastName:Joi.string().allow(""),
+          profilePic:Joi.string().allow(""),
+          deviceType: Joi.string(),
+          deviceToken: Joi.string().allow(""),
+        });
+        let payload=req.body;
+
+          payload.loginType=appConstants.instagramConstants.instagramLogin;
+          await universalFunctions.validateRequestPayload(req.body, res, schema);
+          let userExist=await models.userSchema.findOne({firebaseUID:payload.firebaseUID});
+          if(userExist){
+          let token =jwtAppTokenGenerator(userExist._id,req.body.deviceType,req.body.deviceToken);
+            universalFunctions.sendSuccess(
+              {
+                statusCode: 200,
+                message: responseMessages.LOGIN_SUCCESSFULLY,
+                 data: { token, userExist },
+
+              },
+              res
+            );
+          }else{
+          let userData=await models.userSchema.create(payload);
+          let token =jwtAppTokenGenerator(userData._id,req.body.deviceType,req.body.deviceToken);
+          universalFunctions.sendSuccess(
+            {
+              statusCode: 200,
+              message: responseMessages.USER_CREATED_SUCCESSFULLY,
+              data: { token, userData },
+            },
+            res
+          );
+          }
+
+  }
+  catch (error)
+  {
+    return universalFunctions.sendError(error, res)
+  }
+}
+exports.facebookLogInSignUp = async (req, res) => {
+  try {
+      const schema = Joi.object().keys({
+          firebaseUID: Joi.string().required(),
+          firstName:Joi.string().required(),
+          lastName:Joi.string().allow(""),
+          email:Joi.string().allow(""),
+          profilePic:Joi.string().allow(""),
+          deviceType: Joi.string(),
+          deviceToken: Joi.string().allow("").optional(),
+        });
+        let payload=req.body;
+
+          payload.loginType=appConstants.facebookConstants.facebookLogin;
+          await universalFunctions.validateRequestPayload(req.body, res, schema);
+          let userExist=await models.userSchema.findOne({firebaseUID:payload.firebaseUID});
+          if(userExist){
+          let token =jwtAppTokenGenerator(userExist._id,req.body.deviceType,req.body.deviceToken);
+            universalFunctions.sendSuccess(
+              {
+                statusCode: 200,
+                message: responseMessages.LOGIN_SUCCESSFULLY,
+                 data: { token, userExist },
+
+              },
+              res
+            );
+          }else{
+          let userData=await models.userSchema.create(payload);
+          let token =jwtAppTokenGenerator(userData._id,req.body.deviceType,req.body.deviceToken);
+          universalFunctions.sendSuccess(
+            {
+              statusCode: 200,
+              message: responseMessages.USER_CREATED_SUCCESSFULLY,
+              data: { token, userData },
+            },
+            res
+          );
+          }
+
+  }
+  catch (error)
+  {
+    return universalFunctions.sendError(error, res)
+  }
 }
 
 // userData {

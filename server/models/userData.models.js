@@ -3,10 +3,7 @@ const appConstants=require("../utils/appConstants")
 const Schema = Mongoose.Schema;
 const userDataSchema = new Schema(
     {
-    userId: {
-      type:Number,
-    },
-    FirstName: {
+    firstName: {
       type: String,
     },
     lastName: {
@@ -32,8 +29,8 @@ const userDataSchema = new Schema(
       type: String,
       enum: [appConstants.firebaseLogin,appConstants.googleLoginIn,appConstants.githubLogIn,appConstants.facebookLogin,appConstants.instagramLogin,appConstants.twitterLogin],
     },
-    googleJson: {
-      type: Object,
+    googleInfo: {
+     
       googleId: {
         type: String
       },
@@ -50,8 +47,8 @@ const userDataSchema = new Schema(
         type: String
       }
     },
-    facebookJson: {
-      type: Object,
+    facebookInfo: {
+     
       facebookId: {
         type: String
       },
@@ -74,8 +71,8 @@ const userDataSchema = new Schema(
         type: String
       }
     },
-    instagramJson: {
-      type: Object,
+    instagramInfo: {
+     
       instagramId: {
         type: String
       },
@@ -96,8 +93,8 @@ const userDataSchema = new Schema(
       },
 
     },
-    githubJson: {
-      type: Object,
+    githubInfo: {
+     
       githubId: {
         type: String
       },
@@ -112,8 +109,8 @@ const userDataSchema = new Schema(
       },
     
     },
-    twitterJson: {
-      type: Object,
+    twitterInfo: {
+     
       twitterId: {
         type: String
       },

@@ -1,9 +1,10 @@
-const oauth = require('oauth')
+const oauth = require('oauth');
 
-const { promisify } = require('util')
-const configData=require("../../config");
-const TWITTER_CONSUMER_API_KEY =configData.Twitter_API_Key;
-const TWITTER_CONSUMER_API_SECRET_KEY = configData.Twitter_API_SECRET;
+const { promisify } = require('util');
+const config=require("config");
+const twitterKey =config.get("twitterKey");
+const TWITTER_CONSUMER_API_KEY =twitterKey.Twitter_API_Key;
+const TWITTER_CONSUMER_API_SECRET_KEY = twitterKey.Twitter_API_SECRET;
 
 const oauthConsumer = new oauth.OAuth(
   'https://twitter.com/oauth/request_token', 'https://twitter.com/oauth/access_token',

@@ -6,11 +6,11 @@ const jwtGenerator = async (userId) => {
   const token =await jwt.sign({ user_id: userId,deviceType:'1',deviceToken:"" }, jwtConfig);
   return token;
 };
-const jwtGeneratorApp = async (userId,deviceType,deviceToken) => {
+const jwtAppTokenGenerator = async (userId,deviceType,deviceToken) => {
   const token =await jwt.sign({ user_id: userId,deviceType,deviceToken }, jwtConfig);
   return token;
 };
 module.exports = {
   jwtGenerator,
-  jwtGeneratorApp
+  jwtAppTokenGenerator
 };

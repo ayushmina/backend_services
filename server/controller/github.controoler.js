@@ -1,12 +1,15 @@
-const axios = require("axios");
-const { response } = require("express");
-const config = require("../../config");
-const models = require("../models")
-const appConstants = require("../utils/appConstants")
-const responseMessages=require("../resources/resources.json")
-const clientID = config.GITHUB_CLIENT_ID;
-const clientSecret = config.GITHUB_CLIENT_SECRET;
-const  universalFunctions =require("../utils/unversalFunction");
+const axios                         =require("axios");
+const { response }                  =require("express");
+const models                        =require("../models")
+const  universalFunctions           =require("../utils/unversalFunction");
+const appConstants                  =require("../utils/appConstants")
+const responseMessages              =require("../resources/resources.json")
+const config                        =require("config");
+
+const githubKey=config.get("githubKey")
+const clientID = githubKey.GITHUB_CLIENT_ID;
+const clientSecret = githubKey.GITHUB_CLIENT_SECRET;
+
 exports.gitRedirect=(req, res) => {
     res.redirect(`https://github.com/login/oauth/authorize?client_id=${clientID}`) 
 }
