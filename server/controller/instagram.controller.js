@@ -25,7 +25,7 @@ module.exports = {
                 }
             };
             httpRequest(options,  async (error, response, body)=> {
-                if (!error && response.statusCode == 200) {
+                if (!error) {
                     var user = JSON.parse(body);
                     console.log(user,"user inside redirectUriRoutes ")
                     // res.send({ data: user })
