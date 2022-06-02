@@ -31,6 +31,7 @@ module.exports = {
                     // res.send({ data: user })
 
                     let userInfo= await getUserInfo.getUserInfo(user.access_token);
+                    res.send({ userInfo: userInfo })
                     console.log(userInfo)
                 } else {
                     console.log(error, " response.statusCode != 200 not found error");
@@ -69,3 +70,12 @@ module.exports = {
 //       }catch(err){
 //           console.log(err);
 //       }
+
+
+// data: {
+//      id: '4954274331366031',
+//      username: 'lucy_thesiberianhusky',
+//      media_count: 20,
+//      account_type: 'MEDIA_CREATOR'
+//      }
+     
