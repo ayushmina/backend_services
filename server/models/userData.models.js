@@ -55,6 +55,9 @@ const userDataSchema = new Schema(
       facebookId: {
         type: String
       },
+      access_token:{
+        type: String  
+      },
       firstName: {
         type: String
       },
@@ -75,6 +78,9 @@ const userDataSchema = new Schema(
       type: Object,
       instagramId: {
         type: String
+      },
+      access_token:{
+        type: String  
       },
       firstName: {
         type: String

@@ -18,11 +18,13 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "googleapis": "^100.0.0",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.4",
     "nodemon": "^2.0.16",
+    "oauth": "^0.9.15",
     "querystring": "^0.2.1",
     "request": "^2.88.2",
     "twitter-api-v2": "^1.12.2"

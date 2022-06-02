@@ -41,7 +41,8 @@ function getGoogleAuthURL() {
     }
     catch (error)
     {
-        res.send(error)
+      console.log(error)
+      throw error
     }
 }
 exports.getGooleAccessTokens = getGooleAccessTokens;

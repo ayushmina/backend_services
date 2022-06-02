@@ -29,19 +29,12 @@ exports.getOauth = async (req, res) => {
       res.send({messge:"authCode Is Not Found"})
     }
     const accessTokenUrl=  facebookServices.generateAccessToken(authCode)
-  //     const accessTokenUrl = 'https://graph.facebook.com/v6.0/oauth/access_token?' +
-  //       `client_id=${appId}&` +
-  //       `client_secret=${appSecret}&` +
-  //       `redirect_uri=${encodeURIComponent(`/oauth-redirect`)}&` +
-  //       `code=${encodeURIComponent(authCode)}`;
+
   console.log("accessTokenUrl",accessTokenUrl)
       const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
       accessTokens.add(accessToken);
       console.log(accessToken,"accessToken");
       res.redirect(`/auth/facebook/me?accessToken=${encodeURIComponent(accessToken)}`);
-  //   } catch (err) {
-  //      console.log(err);
-  //      return res.status(500).json({ message: err.response.data || err.message });
   }
   catch (error)
   {
@@ -52,12 +45,24 @@ exports.getOauth = async (req, res) => {
 exports.getToken= async (req, res) => {
   try { 
     const accessToken = req.query.accessToken;
-    // if (!accessTokens.has(accessToken)) {
-    //   throw new Error(`Invalid access token "${accessToken}"`);
-    // }
-    let data = await axios.get(`https://graph.facebook.com/me?access_token=${encodeURIComponent(accessToken)}`).
+   
+    let data = await axios.get(`https://graph.facebook.com/me?fields=id%2Cname%2Cpicture%2Cabout%2Cbirthday%2Cemail%2Cgender%2Clast_name%2Cposts%2Calbums%7Bphotos%7Bpicture%7D%7D&access_token=${encodeURIComponent(accessToken)}`).
       then(res => {return res});
       console.log(data)
+    let name=data&&data.name?data.name:"";
+    let lastName=data &&data.last_name?data.last_name:"";
+    let facebookId=data && data.id?data.id:"";
+    let profilepic=data&&data.picture?data.picture.data.url:"";
+
+    
+      let dataToSave={
+        name:name,
+        lastName:lastName,
+        id:facebookId,
+        facebookJson:data,
+        profilepic:profilepic
+      }
+      console.log(dataToSave,"dataToSave");
     return res.send(`
       <html>
         <body>Your name is ${data.data}</body>
@@ -68,3 +73,5 @@ exports.getToken= async (req, res) => {
     return res.status(500).json({ message: err.response.data || err.message });
   }
 }
+
+// https://graph.facebook.com/v14.0/me?fields=id%2Cname%2Cpicture%2Cabout%2Cbirthday%2Cemail%2Cgender%2Clast_name%2Cposts%2Calbums%7Bphotos%7Bpicture%7D%7D&access_token=EAAP7k7ZB4yxQBACzlpZAdYZCCLBjjziKucEaAIravAgKxX0cITHARfa3srwMNiKIJ1p9f4sZAxMh6a3uqVGSEOyndPFA7PywDerfW3ianlnQ7sBaW7zodZCyY4Ll2AXPL2XqPPSmnZAbmwHSpXJkdhzxymjsU0hyLOom50IALZA0y2UucSGGqZBkcnvEQNT6jeOO8Ts2HYvNwDbSedM125HkDMSKZC3q54KrhSZAsv8qngFQZDZD

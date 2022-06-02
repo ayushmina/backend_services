@@ -17,7 +17,7 @@ function generateAccessToken(authCode) {
     } catch (error) {
       
       console.log(error);
-      return error;
+     throw error
     }
 }
 exports.generateAccessToken=generateAccessToken;
