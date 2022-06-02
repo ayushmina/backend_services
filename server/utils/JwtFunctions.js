@@ -1,6 +1,7 @@
 const Boom = require("boom");
 const Joi = require("@hapi/joi");
-const { jwtConfig } = require("../../config");
+const config = require("config");
+const jwtConfig =config.get("jwtConfig");
 const jwt = require("jsonwebtoken");
 const jwtGenerator = async (userId) => {
   const token =await jwt.sign({ user_id: userId,deviceType:'1',deviceToken:"" }, jwtConfig);

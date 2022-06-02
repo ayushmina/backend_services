@@ -8,12 +8,6 @@
 //     appAuthRoutes
 // };
 
-// app.use("/auth/app", appAuthRoutes);
-// app.use("/auth/facebook", facebookRoutes);
-// app.use("/auth/google", googleRoutes);
-// app.use("/auth/github", githubRoutes);
-// app.use("/auth/instagram",instagramRoutes)
-// app.use("/auth/twitter",twitterRoutes)
 const express = require('express')
 const facebookRoutes = require("./facebook.routes");
 const googleRoutes = require("./google.routes");
