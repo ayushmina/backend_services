@@ -25,7 +25,7 @@ module.exports = {
                 }
             };
             httpRequest(options,  async (error, response, body)=> {
-                if (!error) {
+                if (!error && response.statusCode == 200) {
                     var user = JSON.parse(body);
                     console.log(user,"user inside redirectUriRoutes ")
                     // res.send({ data: user })
@@ -33,7 +33,7 @@ module.exports = {
                     let userInfo= await getUserInfo.getUserInfo(user.access_token);
                     console.log(userInfo)
                 } else {
-                    console.log(error, "error");
+                    console.log(error, " response.statusCode != 200 not found error");
                     res.send({ error: error })
                 }
             });
