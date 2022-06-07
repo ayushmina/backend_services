@@ -11,6 +11,8 @@
     "hashLength": 10,
     "adminPassword": "tribu",
     "adminEmail": "admin@tribu.com",
+    "SupportEmail":"test.seraphic15@gmail.com",
+    "SupportEmailPassword":"seraphic@123",
     "jwt": {
       "secret": "seraphic",
       "tokenExpire": 120

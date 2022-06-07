@@ -1,10 +1,11 @@
 
-const models = require("../models")
-const appConstants = require("../utils/appConstants")
-const responseMessages=require("../resources/resources.json")
-const  universalFunctions =require("../utils/unversalFunction");
-const Joi=require("joi");
-const {jwtAppTokenGenerator}=require("../utils/JwtFunctions");
+const models                       =require("../models")
+const appConstants                 =require("../utils/appConstants")
+const responseMessages             =require("../resources/resources.json")
+const  universalFunctions          =require("../utils/unversalFunction");
+const Joi                          =require("joi");
+const {jwtAppTokenGenerator}       =require("../utils/JwtFunctions");
+
 exports.firebaseLoginSignUp = async (req, res) => {
     try {
         const schema = Joi.object().keys({
@@ -19,6 +20,13 @@ exports.firebaseLoginSignUp = async (req, res) => {
           });
           let payload=req.body;
           await universalFunctions.validateRequestPayload(payload, res, schema);
+
+          let deviceDetails={
+            deviceType:deviceType,
+            deviceToken:deviceToken
+          }
+          payload.deviceDetails=deviceDetails;
+
           let userExist=await models.userSchema.findOne({firebaseUID:payload.firebaseUID});
           if(userExist){
           let token =jwtAppTokenGenerator(userExist._id,req.body.deviceType,req.body.deviceToken);
@@ -26,7 +34,7 @@ exports.firebaseLoginSignUp = async (req, res) => {
               {
                 statusCode: 200,
                 message: responseMessages.LOGIN_SUCCESSFULLY,
-                 data: { token, userExist },
+                data: { token, userExist },
 
               },
               res

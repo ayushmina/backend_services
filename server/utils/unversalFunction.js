@@ -1,10 +1,10 @@
-const Boom =require("boom");
-const Joi = require("@hapi/joi");
-const responseMessages=require("../resources/resources.json")
-const  { JsonWebTokenError } =require("jsonwebtoken");
+const Boom                     = require("boom");
+const Joi                      = require("@hapi/joi");
+const responseMessages         = require("../resources/resources.json")
+const  { JsonWebTokenError }   = require("jsonwebtoken");
 const validateRequestPayload = async (requestObj, res, schema) => {
   return new Promise((resolve, reject) => {
-    const { error } = Joi.validate(requestObj, schema);
+    const { error } = schema.validate(requestObj);
     if (error) {
       let message = sendBadRequestError(error, res);
       reject(Boom.badRequest(message));

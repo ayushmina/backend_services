@@ -1,27 +1,19 @@
+const express           = require('express')
+const facebookRoutes    = require("./facebook.routes");
+const googleRoutes      = require("./google.routes");
+const githubRoutes      = require("./github.routes");
+const instagramRoutes   = require("./instagram.routes");
+const twitterRoutes     = require("./twitter.routes");
+const appAuthRoutes     = require("./appAuth.routes");
+const costomAuthRouutes     = require("./customAuth.routes");
 
-// module.exports = {
-//     facebookRoutes,
-//     googleRoutes,
-//     githubRoutes,
-//     instagramRoutes,
-//     twitterRoutes,
-//     appAuthRoutes
-// };
-
-const express = require('express')
-const facebookRoutes = require("./facebook.routes");
-const googleRoutes = require("./google.routes");
-const githubRoutes = require("./github.routes");
-const instagramRoutes = require("./instagram.routes");
-const twitterRoutes=require("./twitter.routes");
-const appAuthRoutes=require("./appAuth.routes");
-const router = express.Router()
+const router            = express.Router()
 const defaultRoutes = [
   {
     path: '/facebook',
     route: facebookRoutes,
   },
-  {
+  { 
     path: '/google',
     route: googleRoutes,
   },
@@ -40,6 +32,10 @@ const defaultRoutes = [
   {
     path: '/app',
     route: appAuthRoutes,
+  },
+  {
+    path: '/customAuth',
+    route: costomAuthRouutes,
   },
 ]
 

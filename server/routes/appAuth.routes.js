@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express       = require('express');
+const router        = express.Router();
 const AppAuthController = require("../controller/appAuth.controller")
 router.route("/google/loginSignUp").get(AppAuthController.googleLogInSignUp);
 router.route("/instagram/instagramLogInSignUp").get(AppAuthController.instagramLogInSignUp);

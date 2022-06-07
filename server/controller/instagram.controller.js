@@ -1,10 +1,13 @@
-var httpRequest = require('request');
-let getUserInfo= require("./../services/instragram");
-const config = require('config');
-const instragramKey=config.get("instagramKey");
+var httpRequest              = require('request');
+let getUserInfo              =require("./../services/instragram");
+const config                 =require('config');
+const instragramKey          =config.get("instagramKey");
+
+
 const CLIENTID=instragramKey.CLIENTID;
 const client_secret=instragramKey.client_secret;
 const YOUR_REDIRECT_URI=config.get("SERVER_ROOT_URI")+"/auth/instagram/instagram";
+
 module.exports = {
     getInstagramAuthURL: async (req, res) => {
    var url =`https://api.instagram.com/oauth/authorize?client_id=`

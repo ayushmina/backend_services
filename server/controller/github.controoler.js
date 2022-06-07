@@ -18,24 +18,37 @@ exports.getGithubData = async (req, res) => {
         const requestToken = req.query.code;
         let access_token;
         let userData,payload,isExits;
-        axios({method: 'post', url: `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${requestToken}`,
-            headers: { accept: 'application/json'}
+        axios({
+        method: 'post', 
+        url: `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${requestToken}`,    
+        headers: { accept: 'application/json'}
+
         }).then((response) => {
             access_token = response.data.access_token
-            axios({method: 'get',url: `https://api.github.com/user`,
-            headers: { Authorization: 'token ' + access_token}
+
+            axios(
+                {
+                    method: 'get',
+                    url: `https://api.github.com/user`,
+                    headers: { 
+                        Authorization: 'token ' + access_token
+                    }
             }).then(async(response) => {
+
                 if (response && response.data)
+                
                     userData = response.data;
                     payload = {
+                        githubInfo:userData,
                     userId: userData.id,
-                    userName: userData.login,
+                    firstName: userData.login,
                     email: userData.email,
                     profilePic: userData.picture,
                     loginType:appConstants.githubLogIn,
                     }
-                 isExits = await models.userSchema.findOne({ userId: userData.id })
+                 isExits = await models.userSchema.findOne({ "githubInfo.githubId": userData.id })
                 if (!isExits) {
+
                     await models.userSchema.create(payload)
                 }
             return universalFunctions.sendSuccess(
