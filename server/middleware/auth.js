@@ -4,14 +4,13 @@ const  universalFunctions       = require("../utils/unversalFunction");
 const Joi                       = require("joi");
 const {jwtAppTokenGenerator}    = require("../utils/JwtFunctions");
 const  Boom                     =require("boom")
-const  Config                     =require("config")
+const  Config                   =require("config")
 
 const checkAuth =  async(req, res, next) => {
 
   const token = req.headers["x-access-token"] || req.query["x-access-token"] || req.headers["token"];
 
   if (token) {
-      
       Jwt.verify(token, Config.get("jwt.secret"), async function (err, decoded) {
         try {
           console.log("decoded inside",decoded);
@@ -43,13 +42,13 @@ const checkAuth =  async(req, res, next) => {
               next();
 
         } catch (error) {
-          return Utils.universalFunctions.sendError(error, res);
+          return universalFunctions.sendError(error, res);
         }
 
        })
       
     } else {
-      return Utils.universalFunctions.sendError(
+      return universalFunctions.sendError(
         Boom.forbidden(responseMessages.TOKEN_NOT_PROVIDED),
         res
       );

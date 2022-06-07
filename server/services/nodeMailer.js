@@ -1,25 +1,12 @@
 let nodemailer                =require("nodemailer")
 let config                    =require("config")
 var smtpTransport = require('nodemailer-smtp-transport');
+const nodeMailerConfig=config.get("nodeMailer");
 
 
-
-let Password=config.get("SupportEmailPassword")
-let SupportEmail=config.get("SupportEmail")
-const sendOTP = (email,otp) => {
+const sendOTPUsingEmail =async (email,otp) => {
   try {
-    var transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-          type: "OAuth2",
-          user: "ayushmina10@gmail.com",
-          clientId: "192073990165-k8uk1edbbhb0lm03lqb7ikvf3ibqotr5.apps.googleusercontent.com",
-          clientSecret: "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",
-          accessToken:"ya29.a0ARrdaM_TyQmsEhtGTn79eZF8zsLhvHtJt9lO-OFg5qynrmmHYGZ-wAxRRiOJCfhrD_oY-jvdIMZXuvT3TJHwt7SgjQWGEwjGx9WSBgNOZ7JplWPoLsJsrUuSonpJC7bhqU6xcLj8gJu-N6ETYnNSPEKsWgTf"
-        }
-      });
+    var transporter = nodemailer.createTransport(nodeMailerConfig);
     let bodymessage = `your otp  ${otp}`
     var mailOptions = {
       from: `test.seraphic15@gmail.com`,
@@ -27,12 +14,11 @@ const sendOTP = (email,otp) => {
       subject: `Thank you for contacting Infinite`,
       html: `${bodymessage}`,
     }
-    transporter.sendMail(mailOptions, function (error, info) {
+     transporter.sendMail(mailOptions, function (error, info) {
       if (!error) {
+        console.log(`Email sent!`, info);
 
-        // console.log(info)
       } else {
-        //   console.log(error,info)
         throw error
       }
     })
@@ -40,5 +26,26 @@ const sendOTP = (email,otp) => {
     throw err
   }
 }
-exports.sendOTP=sendOTP;
+exports.sendOTPUsingEmail=sendOTPUsingEmail;
+
+// {
+//   host: "smtp.gmail.com",
+//   port: 465,
+//   secure: true,
+//   auth: {
+//     type: "OAuth2",
+//     user: "test.seraphic15@gmail.com",
+//     clientId: "770958484593-tk52pmiqbca58hpuc6sjgpdtnhn6hjcn.apps.googleusercontent.com",
+//     clientSecret: "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",
+//     accessToken:"ya29.a0ARrdaM8B3Fv76tHtXXb0p9iG6FUzi05S6fjZ8zkCtLZVClUq1Y3Sx6ser4XiR7rFVLdgqkmbIgczX_O_TH53Ty1V6zZIsgrW6w2zs6wchDeEoPFYY-eJb63fi7gWoUOT4iZOYU7hXDNqfMhHiT2XekFek7Gx",
+//     refreshToken:"1//04F9xz3DF9Ak_CgYIARAAGAQSNgF-L9IrjBCieto8unikEBJtt8mFYd_LdIUxdxFm_DHHUzO2En50gsJGFUN8WOc7-snRWIIngw"
+//   }
+// }
+// {
+//   "access_token": "ya29.a0ARrdaM8B3Fv76tHtXXb0p9iG6FUzi05S6fjZ8zkCtLZVClUq1Y3Sx6ser4XiR7rFVLdgqkmbIgczX_O_TH53Ty1V6zZIsgrW6w2zs6wchDeEoPFYY-eJb63fi7gWoUOT4iZOYU7hXDNqfMhHiT2XekFek7Gx", 
+//   "scope": "https://mail.google.com/ https://www.googleapis.com/auth/adwords", 
+//   "token_type": "Bearer", 
+//   "expires_in": 3599, 
+//   "refresh_token": "1//04F9xz3DF9Ak_CgYIARAAGAQSNgF-L9IrjBCieto8unikEBJtt8mFYd_LdIUxdxFm_DHHUzO2En50gsJGFUN8WOc7-snRWIIngw"
+// }
 

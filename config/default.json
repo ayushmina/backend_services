@@ -15,7 +15,7 @@
     "SupportEmailPassword":"seraphic@123",
     "jwt": {
       "secret": "seraphic",
-      "tokenExpire": 120
+      "tokenExpire": 1200
     },
     "stripe": {
       "secretKey": "sk_test_51IpZAyEth7CdLPjsexB0UsL1TTETaLvFVXyQRHlH4I4eeO2jJ1JRfTIKitos4iDY3YIVyDgbPjPNj8zKiyViZQjt0080CogEid"
@@ -24,8 +24,8 @@
     "sessionManager": {
       "webMultiSession": true,
       "deviceMultiSession": true,
-      "adminTokenExpireTime": 120,
-      "userTokenExpireTime": 0
+      "adminTokenExpireTime": 1440,
+      "userTokenExpireTime": 1440
     },
 
     "SERVER_ROOT_URI": "http://localhost:8080",
@@ -54,6 +54,19 @@
    "Twitter_API_Key": "jjYZZBSGPgYEEq44gfCvZ8KFv",
    "Twitter_API_SECRET":"YbxrCI3eMKZtMxDhlPYPC8rnwnE32XYAy1mSgE4XVpT3exRMiD",
   "Twitter_Bearer_Token":"AAAAAAAAAAAAAAAAAAAAAB%2FidAEAAAAA3eaBvnCrOenuBecieoTHeOFXcW0%3DOoHOwqiemVWoa2kC5PqHcWYea0JPHNqcOyqq1R0M08CiquruG5"
+  },
+  "nodeMailer":{
+    "host": "smtp.gmail.com",
+    "port": 465,
+    "secure": true,
+    "auth": {
+      "type": "OAuth2",
+      "user": "test.seraphic15@gmail.com",
+      "clientId": "770958484593-tk52pmiqbca58hpuc6sjgpdtnhn6hjcn.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "accessToken":"ya29.a0ARrdaM8B3Fv76tHtXXb0p9iG6FUzi05S6fjZ8zkCtLZVClUq1Y3Sx6ser4XiR7rFVLdgqkmbIgczX_O_TH53Ty1V6zZIsgrW6w2zs6wchDeEoPFYY-eJb63fi7gWoUOT4iZOYU7hXDNqfMhHiT2XekFek7Gx",
+      "refreshToken":"1//04F9xz3DF9Ak_CgYIARAAGAQSNgF-L9IrjBCieto8unikEBJtt8mFYd_LdIUxdxFm_DHHUzO2En50gsJGFUN8WOc7-snRWIIngw"
+    }
   }
   
 }

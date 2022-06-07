@@ -41,5 +41,6 @@
     "ALREADYEXIST": "Already Exists",
     "TOKEN_NOT_FOUND": "Token No Found",
     "DATA_NOT_FOUND": "Data Not Found",
-    "CODE_NOT_FOUND": "CODE Not Found"
+    "CODE_NOT_FOUND": "CODE Not Found",
+    "SESSION_EXPIRED": "SESSION EXPIRED"
 }

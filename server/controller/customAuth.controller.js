@@ -6,8 +6,8 @@ const config                                 =require("config");
 const {jwtAppTokenGenerator}                 = require("../utils/JwtFunctions");
 const Joi                                    =require("joi");
 const Boom                                   =require("boom");
-const {sendOTP}                               =require("../services/nodeMailer");
-
+const {sendOTPUsingEmail}                    =require("../services/nodeMailer");
+const {sessionManager}                       =require("./../services/sessionmanger");
 exports.signinUser = async function (req, res) {
     try {
       const schema = Joi.object().keys({
@@ -37,8 +37,13 @@ exports.signinUser = async function (req, res) {
         if (!userInfo.authenticate(req.body.password)) {
           throw Boom.badRequest("Authentication failed. Passwords did not match.")
         }
-
-         let token =  await jwtAppTokenGenerator(userInfo._id,payload.deviceType,payload.deviceToken);  
+        let sesssionData = {
+          userId: userInfo._id,
+          deviceType: payload.deviceType,
+        };
+        let token = await sessionManager(sesssionData);
+         console.log(token,"token:123")
+          token =  await jwtAppTokenGenerator(userInfo._id,payload.deviceType,payload.deviceToken);  
       
         let user = {
           token:token,
@@ -94,8 +99,13 @@ exports.signinUser = async function (req, res) {
         let payload=req.body;
 
         let userInfo = await models.userSchema.create(payload);
-  
-        let token =await  jwtAppTokenGenerator(userInfo._id,payload.deviceType,payload.deviceToken);  
+        let sesssionData = {
+          userId: userInfo._id,
+          deviceType: payload.deviceType,
+        };
+        let token = await sessionManager(sesssionData);
+        console.log(token,"token:123")
+         token =await  jwtAppTokenGenerator(userInfo._id,payload.deviceType,payload.deviceToken);  
 
   
         let user = {
@@ -151,7 +161,7 @@ exports.signinUser = async function (req, res) {
         }
       )
     //   call notification service to send email  
-    //   sendOTP(req.body.email,OTP);
+       await  sendOTPUsingEmail(req.body.email,OTP);
 //       forgot passowrd using phone 
 //       sendOTP(req.body.phoneNumber)
       return universalFunctions.sendSuccess(
@@ -256,8 +266,7 @@ exports.signinUser = async function (req, res) {
       let payload = req.body
   
       let userExists = await models.userSchema.findOne({
-        email: req.user.email,
-        isDeleted: false,
+        email: req.user.email
       })
       if (!userExists) {
         throw Boom.badRequest(responseMessages.USER_NOT_FOUND)
@@ -271,7 +280,7 @@ exports.signinUser = async function (req, res) {
       }
   
       userExists.password = payload.password
-      await userExists.save()
+      await userExists.save();
   
       return universalFunctions.sendSuccess(
         {
