@@ -31,15 +31,21 @@ module.exports = {
                 }
             };
             httpRequest(options,  async (error, response, body)=> {
-                console.log(error,body,response.statusCode,"ayush");
-                if (!error && body.access_token) {
+                if (!error) {
                     var user = JSON.parse(body);
                     console.log(user,"user inside redirectUriRoutes ")
-                    // res.send({ data: user })
 
+                    if(user.access_token){
                     let userInfo= await getUserInfo.getUserInfo(user.access_token);
+                    
+                    console.log(userInfo,"userInfo")
+
                     res.send({ userInfo: userInfo })
-                    console.log(userInfo)
+                    }else{
+                        res.send({ userInfo: response })
+                    }
+
+                    
                 } else {
                     console.log(response, " response.statusCode != 200 not found error");
                     res.send({ error: error })
