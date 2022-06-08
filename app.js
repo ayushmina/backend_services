@@ -2,9 +2,9 @@ const express       = require("express");
 const app           = express();
 let bodyParser      = require("body-parser");
 const db            = require("./databaseConnect");
-const routes = require("./server/routes");
-const PORT = process.env.PORT || 8080;
-const path = require('path');
+const routes        = require("./server/routes");
+const PORT          = process.env.PORT || 8080;
+const path          = require('path');
 
 db.mongoConnect();
 

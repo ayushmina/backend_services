@@ -4,7 +4,6 @@
  Google OAuth integration for NodeJS
 
 Without Passport
-Without googleapis npm module
 # What will you get as a result of watching?
  Build Google OAuth integration into your own application
  Have a good understanding of OAuth

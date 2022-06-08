@@ -1,16 +1,21 @@
-const oauth = require('oauth');
-
+const oauth          = require('oauth');
 const { promisify } = require('util');
-const config=require("config");
+const config        =require("config");
+
+
 const twitterKey =config.get("twitterKey");
 const TWITTER_CONSUMER_API_KEY =twitterKey.Twitter_API_Key;
 const TWITTER_CONSUMER_API_SECRET_KEY = twitterKey.Twitter_API_SECRET;
+const callBack_URL=twitterKey.callBack_URL;
 
 const oauthConsumer = new oauth.OAuth(
-  'https://twitter.com/oauth/request_token', 'https://twitter.com/oauth/access_token',
+  'https://twitter.com/oauth/request_token',
+  'https://twitter.com/oauth/access_token',
   TWITTER_CONSUMER_API_KEY,
   TWITTER_CONSUMER_API_SECRET_KEY,
-  '1.0A', 'http://localhost:8080/auth/twitter/twitterCallback', 'HMAC-SHA1')
+  '1.0A'
+  , callBack_URL,  // use config for get twitter callback url 
+   'HMAC-SHA1')
 
 module.exports = {
   oauthGetUserById,

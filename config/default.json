@@ -53,6 +53,7 @@
   "twitterKey": {
    "Twitter_API_Key": "jjYZZBSGPgYEEq44gfCvZ8KFv",
    "Twitter_API_SECRET":"YbxrCI3eMKZtMxDhlPYPC8rnwnE32XYAy1mSgE4XVpT3exRMiD",
+   "callBack_URL":"http://localhost:8080/auth/twitter/twitterCallback",
   "Twitter_Bearer_Token":"AAAAAAAAAAAAAAAAAAAAAB%2FidAEAAAAA3eaBvnCrOenuBecieoTHeOFXcW0%3DOoHOwqiemVWoa2kC5PqHcWYea0JPHNqcOyqq1R0M08CiquruG5"
   },
   "nodeMailer":{

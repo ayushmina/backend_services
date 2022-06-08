@@ -7,7 +7,7 @@ const instragramKey          =config.get("instagramKey");
 const CLIENTID=instragramKey.CLIENTID;
 const client_secret=instragramKey.client_secret;
 const YOUR_REDIRECT_URI=config.get("SERVER_ROOT_URI")+"/auth/instagram/instagram";
-
+// /auth/instagram/instagram            #callback_url 
 module.exports = {
     getInstagramAuthURL: async (req, res) => {
    var url =`https://api.instagram.com/oauth/authorize?client_id=`
@@ -31,7 +31,7 @@ module.exports = {
                 }
             };
             httpRequest(options,  async (error, response, body)=> {
-                if (!error && response.statusCode == 200) {
+                if (!error && body.access_token) {
                     var user = JSON.parse(body);
                     console.log(user,"user inside redirectUriRoutes ")
                     // res.send({ data: user })
@@ -40,7 +40,7 @@ module.exports = {
                     res.send({ userInfo: userInfo })
                     console.log(userInfo)
                 } else {
-                    console.log(error, " response.statusCode != 200 not found error");
+                    console.log(response, " response.statusCode != 200 not found error");
                     res.send({ error: error })
                 }
             });

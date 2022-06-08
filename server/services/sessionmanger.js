@@ -97,7 +97,7 @@ const sessionManager = async (sessionData) => {
         );
       }
     } else {
-      throw Boom.badRequest(responseMessages.DEFAULT);
+      throw Boom.badRequest(responseMessage.DEFAULT);
     }
   } catch (error) {
     throw error;
@@ -141,7 +141,6 @@ const deviceSessionManager = async (
 
     const session = await model.create(dataToSave);
 
-
     const tokenData = {
       userId: sessionData.userId,
       sessionId: session._id,
@@ -160,7 +159,7 @@ const createaccessToken = async (tokenData, expireTime) => {
     if (accessToken) {
       return accessToken;
     } else {
-      throw Boom.badRequest(responseMessages.DEFAULT);
+      throw Boom.badRequest(responseMessage.DEFAULT);
     }
   } catch (error) {
     throw error;

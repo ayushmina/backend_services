@@ -1,8 +1,8 @@
 let nodemailer                =require("nodemailer")
 let config                    =require("config")
-var smtpTransport = require('nodemailer-smtp-transport');
-const nodeMailerConfig=config.get("nodeMailer");
 
+
+const nodeMailerConfig=config.get("nodeMailer");
 
 const sendOTPUsingEmail =async (email,otp) => {
   try {
