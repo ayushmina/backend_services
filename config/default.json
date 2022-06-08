@@ -28,7 +28,7 @@
       "userTokenExpireTime": 1440
     },
 
-    "SERVER_ROOT_URI": "http://localhost:8080",
+    "SERVER_ROOT_URI": "https://authprojectseraphic.herokuapp.com",
 
   "googleKey": {
      "GOOGLE_CLIENT_ID":"192073990165-k8uk1edbbhb0lm03lqb7ikvf3ibqotr5.apps.googleusercontent.com",
