@@ -32,8 +32,8 @@ module.exports = {
             };
             httpRequest(options,  async (error, response, body)=> {
                 if (!error) {
-                    var user = body;
-                    console.log(user,"user inside redirectUriRoutes ")
+                    var user = JSON.parse(body);
+                    console.log(user.access_token,"user inside redirectUriRoutes ")
 
                     if(user.access_token){
                     let userInfo= await getUserInfo.getUserInfo(user.access_token);
