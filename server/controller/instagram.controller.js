@@ -31,6 +31,7 @@ module.exports = {
                 }
             };
             httpRequest(options,  async (error, response, body)=> {
+                console.log(error,body,response.statusCode,"ayush");
                 if (!error && body.access_token) {
                     var user = JSON.parse(body);
                     console.log(user,"user inside redirectUriRoutes ")
