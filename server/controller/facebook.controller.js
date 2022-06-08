@@ -1,6 +1,5 @@
 const axios               = require("axios");
 const config              = require("config");
-const jwt                 = require("jsonwebtoken");
 const facebookServices    =require("../services/facebook")
 const facebookKey=config.get("facebookKey");
 const appId =facebookKey.appId;

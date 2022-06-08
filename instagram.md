@@ -1,7 +1,4 @@
-# Getting Started with Create React App
-
-# What are we building?
- Google OAuth integration for NodeJS
+# Integrate Instagram Basic Display API with Node.js 
 
 
 # Goals
@@ -46,6 +43,91 @@ To follow along in this article, it is necessary to have:
      "client_secret":"b7xxxxxxxxxbe3"
    }
 ```
+# How Instagram authentication works?
+- Lets figure out how Instagram authentication works. On your page you have a Login button which redirects you to the Instagram login page at the url:
+```sh
+  var url =`https://api.instagram.com/oauth/authorize?client_id=`
+            +CLIENTID+`&redirect_uri=`
+            +YOUR_REDIRECT_URI
+            +`&scope=user_profile,user_media&response_type=code`
 
- 
- If you go to https://developers.google.com/oauthplayground/ you can run through the steps online to see what the various URLs and responses look like
+        res.redirect(url);
+
+ "https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code"
+```
+In our Instagram client we have all those query parameters so in our case the url should look like:
+```sh
+cosnt YOUR_REDIRECT_URI=http://localhost:8080//auth/instagram/instagram;
+ var options = {
+                url: 'https://api.instagram.com/oauth/access_token',
+                method: 'POST',
+                form: {
+                    client_id: CLIENTID,
+                    client_secret: client_secret,
+                    grant_type: 'authorization_code',
+                    redirect_uri: YOUR_REDIRECT_URI,
+                    code: req.query.code
+                }
+            };
+            httpRequest(options,  async (error, response, body)=> {
+            }
+
+   "https://api.instagram.com/oauth/authorize/?client_id=CLIENT_ID&redirect_uri=http://localhost:8080//auth/instagram/instagram&response_type=code"
+
+  
+```
+
+After being authorized it will redirect to /insta page(as configured on the above code) with a query parameter containing code. That code will be used to fetch short-lived access token on the backend.
+
+```sh
+"http://localhost:8080//auth/instagram/instagram?code=3304fe84xxxxxxxxxxxxxxxxxxdec"
+```
+
+
+# Getting user profile data
+On an Instagram account, we can be able to get the profile data of that specific account. The profile data here involves the account type, id, media count, and username.
+```sh
+const  getUserInfo= async (access_token)=> {
+    
+        let   userData = await axios.get("https://graph.instagram.com/me", {
+              params: {
+                fields: "id,username,media_count,account_type",
+                access_token: access_token,
+              },
+              headers: {
+                host: "graph.instagram.com",
+              },
+            });
+            return userData;
+
+}
+
+            
+userData=>    data: {
+      id: '49XXXXXXX031',
+      username: 'lucy_XXXXanhusky',
+      media_count: 20,
+      account_type: 'MEDIA_CREATOR'
+      }
+
+const  getUserPostMedia= async (access_token)=> {
+
+        let   postMedia = await axios.get("https://graph.instagram.com/me/media", {
+              params: {
+                fields:
+                  "id,caption,media_url,media_type,permalink,thumbnail_url,timestamp,username",
+                access_token: access_token,
+              },
+              headers: {
+                host: "graph.instagram.com",
+              },
+            });
+
+            return postMedia;
+      
+}
+
+```
+
+To get a long-lived access token, we will follow the following steps:
+ If you go to https://developers.facebook.com/docs/instagram-api/getting-started/ you can run through the steps online to see what the various URLs and responses look like
