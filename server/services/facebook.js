@@ -6,7 +6,7 @@ const config            =require("config");
 const facebookKey       =config.get("facebookKey");
 const appId             =facebookKey.appId;
 const appSecret         = facebookKey.appSecret;
-const SERVER_ROOT_URI   = config.get("SERVER_ROOT_URI");
+const SERVER_ROOT_URI   = config.get("SERVER_ROOT_URI"); //+/auth/facebook/oauth-redirect
 
 function generateAccessToken(authCode) {
       try {
