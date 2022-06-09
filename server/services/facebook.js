@@ -16,9 +16,6 @@ function generateAccessToken(authCode) {
       `redirect_uri=${encodeURIComponent(`${SERVER_ROOT_URI}/auth/facebook/oauth-redirect`)}&` +
       `code=${encodeURIComponent(authCode)}`;
       return accessTokenUrl;
-    // const accessToken = await axios.get(accessTokenUrl).then(res =>{return res.data.access_token});
-    // // accessTokens.add(accessToken);
-    // res.redirect(`/me?accessToken=${encodeURIComponent(accessToken)}`);
     } catch (error) {
       
       console.log(error);

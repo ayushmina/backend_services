@@ -1,6 +1,6 @@
-const config      = require("config");
-const querystring = require('querystring');
-const axios       = require("axios");
+const config              = require("config");
+const querystring         = require('querystring');
+const axios               = require("axios");
 
 const googleKey=config.get("googleKey")
 const GOOGLE_CLIENT_ID =googleKey.GOOGLE_CLIENT_ID;

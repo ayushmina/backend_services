@@ -6,10 +6,11 @@ TWITTER OAUTH LOGIN WITH NODE.JS
 
 # Requirements
 - To have a fully working HTTP server working together with Twitter OAuth in Node.js you need
-an application created on developer.twitter.com to be used to sign in with Twitter
+ an application created on developer.twitter.com to be used to sign in with Twitter
 - a Consumer API key and secret for the OAuth part
 - an HTTP server
 - some lightweight Node.js modules
+- twiiter  developer account
 
 # Dependencies
  Using express as an example here, though you can use any other framework, the concept is the same.
@@ -19,12 +20,40 @@ an application created on developer.twitter.com to be used to sign in with Twitt
 - express as the web server
 - express-session , cookie-parser for handling the user sessions and cookies
 
+
 # The HTTP server and endpoints
 The local HTTP server will listen on the port 3000 and serves the following routes:
 
 - GET / as the simplest possible authentication HTML page
 - GET /twitter/authenticate and /twitter/authorize for the OAuth flow initiation
-- GET /twitter/callback to get the authorized user access token and secret
+- GET /twittercallback to get the authorized user access token and secret
+
+#   Create a Twitter PROJECT & APP 
+![Alt text](https://res.cloudinary.com/dryfxhged/image/upload/v1654767677/alcfm0xyp1vbltg8o7fs.png?raw=true "Title")
+![Alt text](https://res.cloudinary.com/dryfxhged/image/upload/v1654767677/i6ahdn5phmfinzvk8afl.png?raw=true "Title")
+
+
+# SAVE twitter credentials
+```sh
+  "twitterKey": {
+   "Twitter_API_Key": "jjYZZxxxxxxxxxxxxxxxZ8KFv",
+   "Twitter_API_SECRET":"YbxrCI3exxxxxxxxxxxxxxxxxxxxxXVpT3exRMiD",
+   "callBack_URL":"http://localhost:8080/auth/twitter/twitterCallback",   //add 
+  "Twitter_Bearer_Token":"ea0JPHNqxxxxxxxxxxxxxxxxxxxxxxxxxxxxcOyqq1R0M08CiquruG5"
+  }
+
+  ```
+#  Routes Configuration
+```sh
+router.route("/authenticate").get(twitterController.authenticate);         //method for the OAuth flow initiation  by authenticate
+router.route("/authorize").get(twitterController.twitter("authorize"));   //method for the OAuth flow initiation by authorize
+router.route("/twitterCallback").get(twitterController.twitterCallback); //call back URL 
+
+app.use("/auth/twitter",router);
+
+
+```
+- We will hit ~ {backendURL}/auth/twitter/authenticate ~ in our application to initiate authentication flow in our application. This will initiate our twitter authentication by redirecting the user to twitter(If not already logged In).
 
 # Step-by-step
 - We need to create an OAuth Consumer to generate the request, access token and make authorised requests to the Twitter API:
@@ -42,8 +71,7 @@ const oauthConsumer = new oauth.OAuth(
 
 ```sh
 
-  app.get('/twitter/authenticate', twitter('authenticate'))
-  app.get('/twitter/authorize', twitter('authorize'))
+ 
 
   function twitter (method = 'authorize') {
     return async (req, res) => {

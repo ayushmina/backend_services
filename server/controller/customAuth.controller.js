@@ -6,7 +6,7 @@ const config                                 =require("config");
 const {jwtAppTokenGenerator}                 = require("../utils/JwtFunctions");
 const Joi                                    =require("joi");
 const Boom                                   =require("boom");
-const {sendOTPUsingEmail}                    =require("../services/nodeMailer");
+const {sendOTPUsingEmail}                    =require("../services/templates/nodeMailer");
 const {sessionManager}                       =require("./../services/sessionmanger");
 exports.signinUser = async function (req, res) {
     try {
@@ -41,8 +41,8 @@ exports.signinUser = async function (req, res) {
           userId: userInfo._id,
           deviceType: payload.deviceType,
         };
-        let token = await sessionManager(sesssionData);
-         console.log(token,"token:123")
+        // let token = await sessionManager(sesssionData);
+        //  console.log(token,"token:123")
           token =  await jwtAppTokenGenerator(userInfo._id,payload.deviceType,payload.deviceToken);  
       
         let user = {
@@ -175,19 +175,31 @@ exports.signinUser = async function (req, res) {
       return universalFunctions.sendError(error, res)
     }
   } 
-  exports.validateResetToken = async function (req, res) {
+  exports.validateOTP = async function (req, res) {
     try {
       if (!req.body.otp) {
         throw Boom.badRequest(responseMessages.TOKEN_NOT_PROVIDED)
       }
-  
-      let userExists = await models.UserSchema.findOne({
+      const schema = Joi.object().keys({
+        otp: Joi.string().required(),
+        email:Joi.string().optional(),
+        phoneNumber:Joi.string().optional(),
+        usingEmail:Joi.bool().required(),
+    })
+    await universalFunctions.validateRequestPayload(req.body, res, schema)
+      let  payload={
         resetPasswordOtp: req.body.otp,
         resetPasswordExpires: {
           $gt: Date.now(),
         },
-        email: req.body.email,
-      })
+      }
+     if(req.body.usingEmail){
+       payload.email=req.body.email
+     }else{
+      payload.phoneNumber=req.body.phoneNumber
+     }
+
+      let userExists = await models.userSchema.findOne(payload)
       if (!userExists) {
         throw Boom.badRequest(responseMessages.INVALID_OTP)
       }  
@@ -195,7 +207,7 @@ exports.signinUser = async function (req, res) {
         {
           statusCode: 200,
           message: responseMessages.OTP_SUCCESS,
-          data: {},
+          data: true,
         },
         res
       )
@@ -214,6 +226,7 @@ exports.signinUser = async function (req, res) {
         phoneNumber:Joi.string().optional(),
         usingEmail:Joi.bool().required(),
     })
+    await universalFunctions.validateRequestPayload(req.body, res, schema)
     let  filter={
         resetPasswordOtp: req.body.otp,
         resetPasswordExpires: {
@@ -226,7 +239,6 @@ exports.signinUser = async function (req, res) {
         filter.phoneNumber=req.body.phoneNumber;
     }
      
-      await universalFunctions.validateRequestPayload(req.body, res, schema)
       let payload = req.body
     
       let userExists = await models.userSchema.findOne(filter);

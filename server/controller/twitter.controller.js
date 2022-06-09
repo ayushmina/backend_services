@@ -14,14 +14,13 @@ var twitter_access_Token=[];
     return async (request, reply) => {
 
       const { oauthRequestToken, oauthRequestTokenSecret } = await getOAuthRequestToken()
-      console.log(oauthRequestToken)
-      req.session = req.session || {}
+      console.log(oauthRequestToken,"oauthRequestToken")
+      request.session = request.session || {}
       request.session.oauthRequestToken = oauthRequestToken
       request.session.oauthRequestTokenSecret = oauthRequestTokenSecret
-
+      twitter_access_Token.push({oauthRequestToken:oauthRequestToken,oauthRequestTokenSecret:oauthRequestTokenSecret});
       const authorizationUrl = `https://api.twitter.com/oauth/${method}?oauth_token=${oauthRequestToken}`
-      console.log('redirecting user to ', authorizationUrl)
-      reply.redirect(authorizationUrl)
+        reply.redirect(authorizationUrl)
     }
   }
   exports.authenticate= async (request, reply) => {

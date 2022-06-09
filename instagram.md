@@ -6,12 +6,22 @@ we will integrate the Instagram basic display API on a Node.js GraphQL API.
 Without Passport
 
 # Prerequisites
-To follow along in this article, it is necessary to have:
+ it is necessary to have:
 
 - Node.js installed on your computer.
-- Working knowledge of GraphQL.
+- Working knowledge of graph Instagram.
 - Working knowledge of JavaScript
 - Facebook developer account
+# Creating a Facebook developer account
+To create a Facebook developer account, follow the following steps:
+
+Visit the Facebook developer page and on the right side, click Login.
+In the resulting page, key in your credentials and click Log In.
+After signing in, you will be directed to your dashboard page.
+# Creating an app
+
+![Alt text](https://res.cloudinary.com/dryfxhged/image/upload/v1654750667/nwcp3lo7brft9sgdn8zd.png?raw=true "Title")
+
 
 
 # Adding an Instagram test user
@@ -34,7 +44,7 @@ To follow along in this article, it is necessary to have:
 - Click on the Accept button.
 
 - Hurray!!, your Instagram app is now configured, it’s time to set up our project.
-# necessary Getting the authorization code
+# Getting the authorization code
 - For us to use the API, the first step is to get the authorization code. It provides an authentication mechanism to the Instagram API.
 
 ```sh
@@ -55,7 +65,7 @@ To follow along in this article, it is necessary to have:
 
  "https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code"
 ```
-In our Instagram client we have all those query parameters so in our case the url should look like:
+- In our Instagram client we have all those query parameters so in our case the url should look like:
 ```sh
 cosnt YOUR_REDIRECT_URI=http://localhost:8080//auth/instagram/instagram;
  var options = {
@@ -77,15 +87,17 @@ cosnt YOUR_REDIRECT_URI=http://localhost:8080//auth/instagram/instagram;
   
 ```
 
-After being authorized it will redirect to /insta page(as configured on the above code) with a query parameter containing code. That code will be used to fetch short-lived access token on the backend.
+- After being authorized it will redirect to /insta page(as configured on the above code) with a query parameter containing code. That code will be used to fetch short-lived access token on the backend.
 
 ```sh
+
 "http://localhost:8080//auth/instagram/instagram?code=3304fe84xxxxxxxxxxxxxxxxxxdec"
+
 ```
 
 
 # Getting user profile data
-On an Instagram account, we can be able to get the profile data of that specific account. The profile data here involves the account type, id, media count, and username.
+- On an Instagram account, we can be able to get the profile data of that specific account. The profile data here involves the account type, id, media count, and username.
 ```sh
 const  getUserInfo= async (access_token)=> {
     
@@ -128,6 +140,17 @@ const  getUserPostMedia= async (access_token)=> {
 }
 
 ```
+# Routes Configuration
+```sh
+router.route("/instagram/url").get(instagramController.getInstagramAuthURL); //get 
+router.route("/instagram").get(instagramController.redirectUriRoutes); //callback routes
+
+app.use("/auth/instgram",router);
+
+
+```
+- We will hit ~ {backendURL}/auth/instagram//instagram/url ~ in our application to initiate authentication flow in our application. This will initiate our Instagram authentication by redirecting the user to Instagram(If not already logged In).
+
 
 To get a long-lived access token, we will follow the following steps:
  If you go to https://developers.facebook.com/docs/instagram-api/getting-started/ you can run through the steps online to see what the various URLs and responses look like

@@ -59,25 +59,6 @@ const createToken = async (payloadData, time) => {
   });
 };
 
-const validateSession = async (user) => {
-  try {
-    const criteria = {
-      userId: user.userId,
-      _id: user.sessionId,
-      isDeleted: false,
-    };
-    let model = getSessionModelName(user.loginType);
-    const session = await model.findOne(criteria);
-    if (session) {
-      return session.toJSON();
-    } else {
-      throw Boom.unauthorized(responseMessage.INVALID_TOKEN);
-    }
-  } catch (error) {
-    throw error;
-  }
-};
-
 const sessionManager = async (sessionData) => {
   try {
     const defaults = Config.get("sessionManager");
