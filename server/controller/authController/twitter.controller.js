@@ -3,7 +3,7 @@ const {
   getOAuthRequestToken,
   getOAuthAccessTokenWith,
   oauthGetUserById
-} = require('../services/twitter');
+} = require('../../services/authServices/twitter');
 
 
 const fs = require('fs');

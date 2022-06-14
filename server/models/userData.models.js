@@ -1,6 +1,7 @@
 const Mongoose          = require("mongoose");
 const crypto            = require("crypto");
-const appConstants      =require("../utils/appConstants")
+const appConstants      =require("../utils/appConstants");
+const { number } = require("joi");
 const Schema = Mongoose.Schema;
 const userDataSchema = new Schema(
     {
@@ -136,7 +137,7 @@ const userDataSchema = new Schema(
       type: String,
     },
     deviceType:{
-      type: String,
+      type: Number,
       enum:[appConstants.deviceType_android,appConstants.deviceType_apple,appConstants.deviceType_website]
     },
     deviceDetails: [

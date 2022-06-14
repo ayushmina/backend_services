@@ -1,12 +1,12 @@
 const axios               = require("axios");
 const config              = require("config");
-const facebookServices    =require("../services/facebook")
+const facebookServices    =require("../../services/authServices/facebook")
 const facebookKey=config.get("facebookKey");
 const appId =facebookKey.appId;
 const appSecret = facebookKey.appSecret;
 const SERVER_ROOT_URI = config.get("SERVER_ROOT_URI");
 const accessTokens = new Set();
-exports.fbLink = (req, res) => {
+exports.facebookURL = (req, res) => {
   res.send(`
     <html>
       <body>

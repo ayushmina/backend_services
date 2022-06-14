@@ -1,9 +1,9 @@
-const models                    = require("../models")
-const appConstants              = require("../utils/appConstants")
-const responseMessages          = require("../resources/resources.json")
-const  universalFunctions       = require("../utils/unversalFunction");
+const models                    = require("../../models")
+const appConstants              = require("../../utils/appConstants")
+const responseMessages          = require("../../resources/resources.json")
+const  universalFunctions       = require("../../utils/unversalFunction");
 const Joi                       = require("joi");
-const {jwtAppTokenGenerator}    = require("../utils/JwtFunctions");
+const {jwtAppTokenGenerator}    = require("../../utils/JwtFunctions");
 
 exports.googleLogInSignUp = async (req, res) => {
     try {

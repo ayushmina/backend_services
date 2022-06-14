@@ -72,6 +72,11 @@
   "nodeMailer_SMTP":{
   "user": "monu@seraphic.io",
   "pass": "Monusaini@123"
+  },
+  "cloudinaryConfig":{
+    "CLOUD_NAME":"dryfxhged",
+    "API_KEY":"427659738537146",
+    "API_SECRET":"GgccYcqWBLkm9OZ_1epw25Z8ydc"
   }
   
 }

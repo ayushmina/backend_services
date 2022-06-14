@@ -1,13 +1,14 @@
-const universalFunctions                     = require("../utils/unversalFunction")
-const models                                 = require("../models")
-const appConstants                           = require("../utils/appConstants")
-const responseMessages                       =require("../resources/resources.json");
+const universalFunctions                     = require("../../utils/unversalFunction")
+const models                                 = require("../../models")
+const appConstants                           = require("../../utils/appConstants")
+const responseMessages                       =require("../../resources/resources.json");
 const config                                 =require("config");
-const {jwtAppTokenGenerator}                 = require("../utils/JwtFunctions");
+const {jwtAppTokenGenerator}                 = require("../../utils/JwtFunctions");
 const Joi                                    =require("joi");
 const Boom                                   =require("boom");
-const {sendOTPUsingEmail}                    =require("../services/templates/nodeMailer");
-const {sessionManager}                       =require("./../services/sessionmanger");
+const {sendEmail}                    =require("../../services/NodeMailer/emailServices");
+const {sessionManager}                       =require("../../services/authServices/sessionmanger");
+const sendnotif                               =require("../../services/pushNotification/firebaseAdmin");
 exports.signinUser = async function (req, res) {
     try {
       const schema = Joi.object().keys({
@@ -161,7 +162,11 @@ exports.signinUser = async function (req, res) {
         }
       )
     //   call notification service to send email  
-       await  sendOTPUsingEmail(req.body.email,OTP);
+    let emailType="FORGOT_PASSWORD";
+    let dataAddEmail= {
+      token:OTP
+    }
+       await  sendEmail(emailType,dataAddEmail,req.body.email);
 //       forgot passowrd using phone 
 //       sendOTP(req.body.phoneNumber)
       return universalFunctions.sendSuccess(

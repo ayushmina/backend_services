@@ -43,7 +43,9 @@
     "DATA_NOT_FOUND": "Data Not Found",
     "CODE_NOT_FOUND": "CODE Not Found",
     "SESSION_EXPIRED": "SESSION EXPIRED",
+    "INVALID_OTP":"INVALID OTP",
+    "PUSH_NOTIFICATION":"Notifications Send Sucessfully",
     "PASSWORD_CHANGE_SUCCESS":"PASSWORD_CHANGE_SUCCESS",
-    "OTP_SUCCESS":"OTP Match Sucessfully",
-    "INVALID_OTP":"INVALID OTP "
+    "OTP_SUCCESS":"OTP Match Sucessfully"
+    
 }

@@ -1,6 +1,6 @@
 const express           = require('express');
 const router            = express.Router();
-const twitterController = require("../controller/twitter.controller")
+const twitterController = require("../controller/authController/twitter.controller")
 
 router.route("/authenticate").get(twitterController.authenticate);
 router.route("/authorize").get(twitterController.twitter("authorize"));

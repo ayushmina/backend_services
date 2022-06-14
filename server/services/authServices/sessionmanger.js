@@ -1,10 +1,10 @@
 const Jwt               = require("jsonwebtoken");
 const Config            =require("config");
-const responseMessage   =require("../resources/resources.json");
+const responseMessage   =require("../../resources/resources.json");
 const Boom              =require("boom");
-const unversalFunction  =require("../utils/unversalFunction");
-const appConstants      =require("../utils/appConstants");
-const models            =require("../models");
+const unversalFunction  =require("../../utils/unversalFunction");
+const appConstants      =require("../../utils/appConstants");
+const models            =require("../../models");
 
 
 

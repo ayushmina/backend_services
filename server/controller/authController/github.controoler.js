@@ -1,9 +1,9 @@
 const axios                         =require("axios");
 const { response }                  =require("express");
-const models                        =require("../models")
-const  universalFunctions           =require("../utils/unversalFunction");
-const appConstants                  =require("../utils/appConstants")
-const responseMessages              =require("../resources/resources.json")
+const models                        =require("../../models")
+const  universalFunctions           =require("../../utils/unversalFunction");
+const appConstants                  =require("../../utils/appConstants")
+const responseMessages              =require("../../resources/resources.json")
 const config                        =require("config");
 
 const githubKey=config.get("githubKey")

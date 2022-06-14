@@ -1,5 +1,5 @@
 var httpRequest              = require('request');
-let getUserInfo              =require("./../services/instragram");
+let getUserInfo              =require("../../services/authServices/instragram");
 const config                 =require('config');
 const instragramKey          =config.get("instagramKey");
 
