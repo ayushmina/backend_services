@@ -1,10 +1,10 @@
-const express          = require('express');
-const router           = express.Router();
-const upload = require("../controller/Upload/multer")
-const multerImage = require('../services/multer_only_image');
-const cloudinary  = require("../controller/Upload/cloudinaryUpload");
-const s3_controller  = require("../controller/Upload/s3controller");
-const multerS3         = require("../services/uploadService/s3Service");  
+const express               = require('express');
+const router                = express.Router();
+const upload                = require("../controller/Upload/multer")
+const multerImage           = require('../services/multer_only_image');
+const cloudinary            = require("../controller/Upload/cloudinaryUpload");
+const s3_controller         = require("../controller/Upload/s3controller");
+const multerS3              = require("../services/uploadService/s3Service");  
 
 router.route("/fileUpload").post(upload.Upload);
 router.route("/cloudinaryUpload").post(multerImage.array('image') ,cloudinary.upload_ON_Cloudinary);

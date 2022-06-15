@@ -1,6 +1,6 @@
-const oauth          = require('oauth');
-const { promisify } = require('util');
-const config        =require("config");
+const oauth           = require('oauth');
+const { promisify }   = require('util');
+const config          =require("config");
 
 
 const twitterKey =config.get("twitterKey");

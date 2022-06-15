@@ -1,6 +1,6 @@
-const Config = require("config")
-const Templates= require("./emailTemplates")
-const Handlebars=require("handlebars")
+const Config                  = require("config")
+const Templates               = require("./emailTemplates")
+const Handlebars              =require("handlebars")
 let nodemailer                =require("nodemailer")
 
 const nodeMailerConfig=Config.get("nodeMailer_SMTP");

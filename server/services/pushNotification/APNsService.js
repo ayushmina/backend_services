@@ -1,5 +1,5 @@
-var apn = require("apn");
-var path = require('path');
+var apn                = require("apn");
+var path               = require('path');
 try {
     var options = {
         cert: path.join(__dirname, 'cert.pem'),         // Certificate file path

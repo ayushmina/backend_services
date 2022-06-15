@@ -1,7 +1,7 @@
 const Mongoose          = require("mongoose");
 const crypto            = require("crypto");
-const appConstants      =require("../utils/appConstants");
-const { number } = require("joi");
+const appConstants      = require("../utils/appConstants");
+const { number }        = require("joi");
 const Schema = Mongoose.Schema;
 const userDataSchema = new Schema(
     {

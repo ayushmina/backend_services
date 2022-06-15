@@ -1,13 +1,13 @@
-const axios                                  = require("axios")
-const jwt                                    = require("jsonwebtoken");
-const { google }                             = require('googleapis');
-const googleService                          = require("../../services/authServices/google.service")
-const universalFunctions                     = require("../../utils/unversalFunction")
-const models                                 = require("../../models")
-const appConstants                           = require("../../utils/appConstants")
-const responseMessages                       =require("../../resources/resources.json");
-const config                                 =require("config");
-const {jwtAppTokenGenerator,jwtGenerator}                 =require("../../utils/JwtFunctions");
+const axios                                           = require("axios")
+const jwt                                             = require("jsonwebtoken");
+const { google }                                      = require('googleapis');
+const googleService                                   = require("../../services/authServices/google.service")
+const universalFunctions                              = require("../../utils/unversalFunction")
+const models                                          = require("../../models")
+const appConstants                                    = require("../../utils/appConstants")
+const responseMessages                                = require("../../resources/resources.json");
+const config                                          = require("config");
+const {jwtAppTokenGenerator,jwtGenerator}             = require("../../utils/JwtFunctions");
 const googleKey=config.get("googleKey")
 
 const GOOGLE_CLIENT_ID =googleKey.GOOGLE_CLIENT_ID;

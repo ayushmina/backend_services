@@ -1,5 +1,6 @@
-const cloudinary = require("cloudinary")
-const config = require("config");
+const cloudinary              = require("cloudinary")
+const config                  = require("config");
+
 require("dotenv").config();
 let cloudinaryConfig = config.get("cloudinaryConfig")
 cloudinary.config({

@@ -1,5 +1,5 @@
-const multer = require('multer');
-const { normalize } = require('path')
+const multer            = require('multer');
+const { normalize }     = require('path')
 
 const storage = multer.diskStorage({
       
