@@ -1,14 +1,14 @@
 const universalFunctions                     = require("../../utils/unversalFunction")
 const models                                 = require("../../models")
 const appConstants                           = require("../../utils/appConstants")
-const responseMessages                       =require("../../resources/resources.json");
-const config                                 =require("config");
+const responseMessages                       = require("../../resources/resources.json");
+const config                                 = require("config");
 const {jwtAppTokenGenerator}                 = require("../../utils/JwtFunctions");
-const Joi                                    =require("joi");
-const Boom                                   =require("boom");
-const {sendEmail}                    =require("../../services/NodeMailer/emailServices");
-const {sessionManager}                       =require("../../services/authServices/sessionmanger");
-const sendnotif                               =require("../../services/pushNotification/firebaseAdmin");
+const Joi                                    = require("joi");
+const Boom                                   = require("boom");
+const {sendEmail}                            = require("../../services/NodeMailer/emailServicesSMTP");
+const {sessionManager}                       = require("../../services/authServices/sessionmanger");
+const sendnotif                              = require("../../services/pushNotification/firebaseAdmin");
 exports.signinUser = async function (req, res) {
     try {
       const schema = Joi.object().keys({

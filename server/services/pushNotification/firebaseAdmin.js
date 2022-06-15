@@ -17,7 +17,7 @@ admin.initializeApp({
 
 
 exports.sendPushNotifications=async (deviceToken,payload)=>{
-     deviceToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjI1ZmVmOGVmOTYyYTI3NjFjZDE5ZWIwIiwiZGV2aWNlVHlwZSI6IjIiLCJkZXZpY2VUb2tlbiI6IjU3NjI2NDVkNmNjNzI5MzYiLCJpYXQiOjE2NTQ4MzYyNTR9.Mdpn4ri6bqQBbGDhzsa03i8d7TKZwxmGoFdZWx0nSAs";
+    //  deviceToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjI1ZmVmOGVmOTYyYTI3NjFjZDE5ZWIwIiwiZGV2aWNlVHlwZSI6IjIiLCJkZXZpY2VUb2tlbiI6IjU3NjI2NDVkNmNjNzI5MzYiLCJpYXQiOjE2NTQ4MzYyNTR9.Mdpn4ri6bqQBbGDhzsa03i8d7TKZwxmGoFdZWx0nSAs";
     let deviceType="1"
      payload = {
         notification: {
