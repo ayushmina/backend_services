@@ -6,9 +6,10 @@ const responseMessages          = require("../../resources/resources.json")
 const  universalFunctions       = require("../../utils/unversalFunction");
 const Joi                       = require("joi");
 const Boom                      = require("boom");
+const config                    = require("config");
 
 
-var serviceAccount = require("../../borhafirebaseAdmin.json");
+var serviceAccount = config.get("firebaseAdminSDK");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

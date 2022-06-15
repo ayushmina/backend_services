@@ -81,7 +81,7 @@ exports.facebookURL = (req, res) => {
     </html>
   `);
 
-router.get('/facebookLink', facebook.fbLink);
+ router.get('/facebookLink', facebook.fbLink);
 }
 ```
 - The above route just displays some HTML with a single link. The only detail worth noting is the appId variable in the URL. In order to do Facebook login, you need to register an app on developers.facebook.com and take the "App ID" and "App Secret" from your app's details page.

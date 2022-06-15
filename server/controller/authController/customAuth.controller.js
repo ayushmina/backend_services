@@ -166,6 +166,8 @@ exports.signinUser = async function (req, res) {
     let dataAddEmail= {
       token:OTP
     }
+    // sendEmail = (emailType, emailVariables, emailId)
+    // emailVariables it shoud be object 
        await  sendEmail(emailType,dataAddEmail,req.body.email);
 //       forgot passowrd using phone 
 //       sendOTP(req.body.phoneNumber)
