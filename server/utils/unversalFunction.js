@@ -2,6 +2,8 @@ const Boom                     = require("boom");
 const Joi                      = require("@hapi/joi");
 const responseMessages         = require("../resources/resources.json")
 const  { JsonWebTokenError }   = require("jsonwebtoken");
+const translate = require('translate-google')
+
 const validateRequestPayload = async (requestObj, res, schema) => {
   return new Promise((resolve, reject) => {
     const { error } = schema.validate(requestObj);
@@ -27,7 +29,7 @@ const sendOauthError = (err, res) => {
   res.status(err.statusCode).json(err.prepareResponse());
 };
 
-const sendError = (data, res) => {
+const sendError =async (data, res) => {
   let error;
   console.log("ERROR OCCURRED IN SEND ERROR FUNCTION", data);
   let message = null;
@@ -59,6 +61,7 @@ const sendError = (data, res) => {
     } else {
       message = responseMessages.DEFAULT;
     }
+    message=await translateResponse(message)
     if (message !== null) {
       error = new Boom(message, {
         statusCode: 400,
@@ -85,10 +88,11 @@ const sendError = (data, res) => {
  * send success
  * -----------------------------------------------------------------------------*/
 
-const sendSuccess = (response, res) => {
+const sendSuccess =async (response, res) => {
   const statusCode =
     response && response.statusCode ? response.statusCode : 200;
-  const message = response && response.message ? response.message : "Success";
+  let message = response && response.message ? response.message : "Success";
+  message=await translateResponse(message)
   const data = response.data ? response.data : {};
   if (data.password) {
     delete data.password;
@@ -112,10 +116,20 @@ const sendBadRequestError = (error, res) => {
 
   return message;
 };
+const translateResponse = async (text)=>{
 
+  translate(text, {to: 'hi'}).then(res => {
+      console.log(res,"here ")
+      return res;
+  }).catch(err => {
+      return "lll";
+  })
+  
+}
 module.exports = {
   validateRequestPayload,
   sendSuccess,
   sendError,
   sendOauthError,
+  translateResponse
 };

@@ -8,7 +8,7 @@ const cors          = require('cors');
 const path          = require('path');
 
 const uploadRoutes  = require("./server/routes/upload.routes");
- 
+const admin         = require("./server/routes/adminRoutes/index")
 db.mongoConnect();
 app.use(cors());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/auth', routes)
 app.use('/upload', uploadRoutes)
-
+app.use("/admin",admin);
 
 
 let router = express.Router();

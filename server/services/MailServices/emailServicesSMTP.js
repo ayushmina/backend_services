@@ -1,7 +1,11 @@
 const Config                  = require("config")
 const Templates               = require("./emailTemplates")
 const Handlebars              =require("handlebars")
-let nodemailer                =require("nodemailer")
+let nodemailer                =require("nodemailer");
+let universalFunctions        =require("./../../utils/unversalFunction")
+let models                    =require("./../../models") 
+// let mailchimp                =require("./mailchimp")
+// let SendGrid                =require("./sendGrid")
 
 const nodeMailerConfig=Config.get("nodeMailer_SMTP");
 
@@ -10,7 +14,7 @@ const renderMessageFromTemplateAndVariables = (templateData, variablesData) => {
 };
 
 
-exports.sendEmail = (emailType, emailVariables, emailId) => {
+exports.sendEmail =async (emailType, emailVariables, emailId) => {
     var transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
@@ -28,21 +32,26 @@ exports.sendEmail = (emailType, emailVariables, emailId) => {
     html: null,
   };
 
+ const emailTemp=await  models.emailTemplateSchema.findOne({type:emailType})
+ if(!emailTemp){
+  return universalFunctions.sendError("emailTemplate is found add on db first/check email type ", res)
+ }
+ console.log(emailTemp,emailType,"nj")
   switch (emailType) {
 
 
     case "FORGOT_PASSWORD":
-      mailOptions.subject = Templates.forgotPasswordDoc.subject;
+      mailOptions.subject = emailTemp.subject;
       mailOptions.html = renderMessageFromTemplateAndVariables(
-        Templates.forgotPasswordDoc.html,
+        emailTemp.htmlBody,
         emailVariables
       );
       break;
 
     case "FEEDBACK":
-      mailOptions.subject = Templates.feedback.subject;
+      mailOptions.subject = emailTemp.subject;
       mailOptions.html = renderMessageFromTemplateAndVariables(
-        Templates.feedback.html,
+        emailTemp.htmlBody,
         emailVariables
       );
       break;

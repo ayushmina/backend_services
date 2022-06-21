@@ -1,5 +1,6 @@
 
 const { uploadFile, downloadFile, deleteFile, listFiles, uploadFile2 }= require('../../services/uploadService/s3Service')
+const deleteFiles = require("../../utils/deleteFiles");
 
 
 
@@ -17,9 +18,21 @@ module.exports = {
 
    // Upload File from S3
    S3Upload:async (req, res) => {
-       
+    console.log(req.files)
        let data=await  uploadFile2(req.files[0]).promise();
+
+
+
+
        console.log("data.Location :=>",data.Location);
+       const files = req.files;
+    
+      
+       for (const file of files) {
+         const { filename } = file;
+         console.log(filename,"FIENAME")
+         await deleteFiles.deleteFile(filename);
+       }
         return res.json({ success: true, data: data })
       },
 
@@ -57,37 +70,4 @@ module.exports = {
 }
 
 
-
-
-// router.get('/list', async (req, res) => {
-//   const { success, data } = await listFiles()
-//   if (success) {
-//     return res.json({ success, data })
-//   }
-//   return res.status(500).json({ success: false, message: 'Error Occured !!!'})
-// });
-
-// // Upload File to S3
-// router.post('/upload', uploadFile.single('file'), async (req, res) => {
-//   return res.json({ success: true, data: req.file })
-// });
-
-// // Download File from S3
-// router.get('/download/:filename', async (req, res) => {
-//   const filename = req.params.filename
-//   const { success, data } = await downloadFile(filename)
-//   if (success) {
-//     return res.json({ success, data })
-//   }
-//   return res.status(500).json({ success: false, message: 'Error Occured !!!'})
-// });
-
-// router.delete('/delete/:filename', async (req, res) => {
-//   const filename = req.params.filename
-//   const { success, data } = await deleteFile(filename)
-//   if (success) {
-//     return res.json({ success, data })
-//   }
-//   return res.status(500).json({ success: false, message: 'Error Occured !!!'})
-// });
 

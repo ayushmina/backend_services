@@ -46,6 +46,7 @@
     "INVALID_OTP":"INVALID OTP",
     "PUSH_NOTIFICATION":"Notifications Send Sucessfully",
     "PASSWORD_CHANGE_SUCCESS":"PASSWORD_CHANGE_SUCCESS",
-    "OTP_SUCCESS":"OTP Match Sucessfully"
+    "OTP_SUCCESS":"OTP Match Sucessfully",
+    "NO_FILES_UPLOAD":"NO FILE UPLOAD"
     
 }

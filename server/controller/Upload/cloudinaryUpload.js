@@ -1,6 +1,6 @@
 
-const cloudinary = require('../../services/uploadService/cloudinary/cloudinary');
-
+const cloudinary   = require('../../services/uploadService/cloudinary/cloudinary');
+const {deleteFile} = require("../../utils/deleteFiles");
 exports.upload_ON_Cloudinary =async (req, res) => {
     try{
     const uploader = async (path) =>{
@@ -18,11 +18,13 @@ exports.upload_ON_Cloudinary =async (req, res) => {
     
       
       for (const file of files) {
-        const { path } = file;
-        const newPath = await uploader(path)
-        urls.push(newPath)
-     
+        const { path,filename } = file;
+        const newPath = await uploader(path);
+        urls.push(newPath);
+        console.log(filename,newPath,"FIENAME")
+        await deleteFile(filename);
       }
+
   
       res.status(200).json({
         message: 'images uploaded successfully',

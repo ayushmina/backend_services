@@ -6,7 +6,7 @@ const config                                 = require("config");
 const {jwtAppTokenGenerator}                 = require("../../utils/JwtFunctions");
 const Joi                                    = require("joi");
 const Boom                                   = require("boom");
-const {sendEmail}                            = require("../../services/NodeMailer/emailServicesSMTP");
+const {sendEmail}                            = require("../../services/MailServices/emailServicesSMTP");
 const {sessionManager}                       = require("../../services/authServices/sessionmanger");
 const sendnotif                              = require("../../services/pushNotification/firebaseAdmin");
 exports.signinUser = async function (req, res) {
@@ -85,11 +85,11 @@ exports.signinUser = async function (req, res) {
       } else {
         const schema = Joi.object().keys({
           name: Joi.string().trim().required(),
-          lastName:Joi.string().trim().required(),
-          email: Joi.string().email().required(),
-          phoneNumber:Joi.string().required(),
-          profilePic:Joi.string().required(),
-          countryCode:Joi.string().required(),
+          lastName:Joi.string().trim().optional(),
+          email: Joi.string().email().optional(),
+          phoneNumber:Joi.string().optional(),
+          profilePic:Joi.string().optional(),
+          countryCode:Joi.string().optional(),
           password: Joi.string().required(),
           deviceType: Joi.string().trim().required(),
           deviceToken: Joi.string().required(),
