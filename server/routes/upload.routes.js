@@ -12,7 +12,7 @@ router.route("/s3/getfiles").get(s3_controller.getListFiles);
 router.route("/s3/download").get(s3_controller.downloadfile);
 router.route("/s3/delete").delete(s3_controller.deleteFile);
 router.route("/s3/uploadfiles").post(multerFiles.array('file') ,s3_controller.S3Upload);
-router.route("/fileUpload/multer").post(upload.Upload);
+router.route("/fileUpload/multer").post(upload.UploadLocal);
 
 // router.route("/s3/uploadfiles").post(multerS3.uploadFile.single("file"),s3_controller.S3Upload);
 

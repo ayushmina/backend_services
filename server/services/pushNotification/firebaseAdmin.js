@@ -1,5 +1,4 @@
 var admin                       = require("firebase-admin");
-var serviceAccount              = require("../../../firebaseConfig.json");
 const models                    = require("../../models")
 const appConstants              = require("../../utils/appConstants")
 const responseMessages          = require("../../resources/resources.json")

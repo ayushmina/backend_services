@@ -1,6 +1,4 @@
 const translate = require('translate-google')
-
-
 exports.translateResponse = async (text)=>{
 
     translate(text, {to: 'hi'}).then(res => {
@@ -11,8 +9,6 @@ exports.translateResponse = async (text)=>{
     })
     
 }
-// translateResponse();
-
 
 
 const langs = {

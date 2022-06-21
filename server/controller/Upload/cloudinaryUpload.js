@@ -1,11 +1,16 @@
 
 const cloudinary   = require('../../services/uploadService/cloudinary/cloudinary');
 const {deleteFile} = require("../../utils/deleteFiles");
+
 exports.upload_ON_Cloudinary =async (req, res) => {
     try{
+      let lang="en";
+      if(req.body.lang){
+        lang=req.body.lang
+      }
     const uploader = async (path) =>{
-       
-       let data= await cloudinary.uploads(path, 'uploads');
+
+      let data= await cloudinary.uploads(path, 'uploads');
        return data;
         }
     
@@ -27,7 +32,7 @@ exports.upload_ON_Cloudinary =async (req, res) => {
 
   
       res.status(200).json({
-        message: 'images uploaded successfully',
+        message: req.t("UPLOADFILES", { lng: lang }),
         data: urls
       })
     }catch(error){

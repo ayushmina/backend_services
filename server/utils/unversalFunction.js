@@ -2,7 +2,7 @@ const Boom                     = require("boom");
 const Joi                      = require("@hapi/joi");
 const responseMessages         = require("../resources/resources.json")
 const  { JsonWebTokenError }   = require("jsonwebtoken");
-const translate = require('translate-google')
+const translate                = require('translate-google')
 
 const validateRequestPayload = async (requestObj, res, schema) => {
   return new Promise((resolve, reject) => {
@@ -61,7 +61,6 @@ const sendError =async (data, res) => {
     } else {
       message = responseMessages.DEFAULT;
     }
-    message=await translateResponse(message)
     if (message !== null) {
       error = new Boom(message, {
         statusCode: 400,
@@ -92,7 +91,6 @@ const sendSuccess =async (response, res) => {
   const statusCode =
     response && response.statusCode ? response.statusCode : 200;
   let message = response && response.message ? response.message : "Success";
-  message=await translateResponse(message)
   const data = response.data ? response.data : {};
   if (data.password) {
     delete data.password;
@@ -117,15 +115,22 @@ const sendBadRequestError = (error, res) => {
   return message;
 };
 const translateResponse = async (text)=>{
-
+  
   translate(text, {to: 'hi'}).then(res => {
-      console.log(res,"here ")
       return res;
   }).catch(err => {
       return "lll";
   })
   
 }
+// const hello =async ()=>{
+//   let temp=[]
+//   response.respoArry.map(e=>{
+//   console.log(e);
+//   temp.push(e)
+//   })
+// }
+// hello()
 module.exports = {
   validateRequestPayload,
   sendSuccess,

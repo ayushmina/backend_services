@@ -11,6 +11,10 @@ const {sessionManager}                       = require("../../services/authServi
 const sendnotif                              = require("../../services/pushNotification/firebaseAdmin");
 exports.signinUser = async function (req, res) {
     try {
+      let lang="en";
+      if(req.body.lang){
+        lang=req.body.lang;
+      }
       const schema = Joi.object().keys({
         email: Joi.string().trim().required(),
         password: Joi.string().trim().required(),
@@ -57,7 +61,7 @@ exports.signinUser = async function (req, res) {
         return universalFunctions.sendSuccess(
           {
             statusCode: 200,
-            message: responseMessages.SIGNIN_SUCCESS,
+            message: req.t("SIGNIN_SUCCESS",{lng:lang}),
             data: user,
           },
           res
@@ -69,6 +73,10 @@ exports.signinUser = async function (req, res) {
   }  
   exports.signup = async function (req, res) {
     try {
+      let lang="en";
+      if(req.body.lang){
+        lang=req.body.lang;
+      }
       let payload = req.body
       console.log("payload", payload)
       let userExists = await models.userSchema.findOne({
@@ -119,7 +127,8 @@ exports.signinUser = async function (req, res) {
         return universalFunctions.sendSuccess(
           {
             statusCode: 200,
-            message: responseMessages.USER_CREATED_SUCCESSFULLY,
+            message: req.t("USER_CREATED_SUCCESSFULLY",{lng:lang}),
+            
             data: user,
           },
           res
@@ -131,7 +140,12 @@ exports.signinUser = async function (req, res) {
   }
   exports.forgotPassword = async function (req, res) {
     try {
+      
         let payload={};
+        let lang="en";
+        if(req.body.lang){
+          lang=req.body.lang;
+        }
         if(req.body.usingEmail){
             payload.email=req.body.email
         }else{
@@ -174,7 +188,7 @@ exports.signinUser = async function (req, res) {
       return universalFunctions.sendSuccess(
         {
           statusCode: 200,
-          message: responseMessages.OTP_SENT_SUCCESSFULLY,
+          message: req.t("OTP_SUCCESS",{lng:lang}),
         },
         res
       )
@@ -184,6 +198,10 @@ exports.signinUser = async function (req, res) {
   } 
   exports.validateOTP = async function (req, res) {
     try {
+      let lang="en";
+      if(req.body.lang){
+        lang=req.body.lang;
+      }
       if (!req.body.otp) {
         throw Boom.badRequest(responseMessages.TOKEN_NOT_PROVIDED)
       }
@@ -213,7 +231,7 @@ exports.signinUser = async function (req, res) {
       return universalFunctions.sendSuccess(
         {
           statusCode: 200,
-          message: responseMessages.OTP_SUCCESS,
+          message: req.t("OTP_SUCCESS",{lng:lang}),
           data: true,
         },
         res
@@ -225,6 +243,10 @@ exports.signinUser = async function (req, res) {
   
   exports.resetPassword = async function (req, res) {
     try {
+      let lang="en";
+      if(req.body.lang){
+        lang=req.body.lang;
+      }
       const schema = Joi.object().keys({
         otp: Joi.string().required(),
         password: Joi.string().required(),
@@ -264,7 +286,7 @@ exports.signinUser = async function (req, res) {
       return universalFunctions.sendSuccess(
         {
           statusCode: 200,
-          message: responseMessages.PASSWORD_CHANGE_SUCCESS,
+          message: req.t("PASSWORD_CHANGE_SUCCESS",{lng:lang}),
           data: {},
         },
         res
@@ -275,6 +297,10 @@ exports.signinUser = async function (req, res) {
   }
   exports.changePassword = async function (req, res) {
     try {
+      let lang="en";
+      if(req.body.lang){
+        lang=req.body.lang;
+      }
       const schema = Joi.object().keys({
         currentPassword: Joi.string().required(),
         password: Joi.string().required(),
@@ -304,7 +330,7 @@ exports.signinUser = async function (req, res) {
       return universalFunctions.sendSuccess(
         {
           statusCode: 200,
-          message: responseMessages.PASSWORD_CHANGE_SUCCESS,
+          message: req.t("PASSWORD_CHANGE_SUCCESS",{lng:lang}),
           data: {},
         },
         res

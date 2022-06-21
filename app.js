@@ -6,9 +6,30 @@ const routes        = require("./server/routes");
 const PORT          = process.env.PORT || 8080;
 const cors          = require('cors');
 const path          = require('path');
+const i18next       = require('i18next')
+const HttpBackend   = require('i18next-http-backend')
+var middleware      = require('i18next-http-middleware')
+const config        = require("config");
+let SERVER_ROOT_URI="http://localhost:8080";
+app.use('/locales',express.static(path.join(__dirname, "locales")));
+i18next.use(HttpBackend).use(middleware.LanguageDetector).init({
+  lng: 'en',
+  fallbackLng: 'en',
+  preload: ['en', 'de'],
+  ns: ['translation'],
+  defaultNS: 'translation',
+  backend: {
+    loadPath: `${SERVER_ROOT_URI}/locales/{{lng}}/{{ns}}.json`
+  }
+}, (err, t) => {
+  if (err) return console.error(err)
+  // console.log(t('welcome'))
+  // console.log(t('welcome', { lng: 'de' }))
+})
 
 const uploadRoutes  = require("./server/routes/upload.routes");
 const admin         = require("./server/routes/adminRoutes/index")
+app.use(middleware.handle(i18next))
 db.mongoConnect();
 app.use(cors());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
