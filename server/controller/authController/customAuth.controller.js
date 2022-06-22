@@ -9,6 +9,7 @@ const Boom                                   = require("boom");
 const {sendEmail}                            = require("../../services/MailServices/emailServicesSMTP");
 const {sessionManager}                       = require("../../services/authServices/sessionmanger");
 const sendnotif                              = require("../../services/pushNotification/firebaseAdmin");
+
 exports.signinUser = async function (req, res) {
     try {
       let lang="en";
@@ -46,9 +47,9 @@ exports.signinUser = async function (req, res) {
           userId: userInfo._id,
           deviceType: payload.deviceType,
         };
-        // let token = await sessionManager(sesssionData);
+        let token = await sessionManager(sesssionData);
         //  console.log(token,"token:123")
-          token =  await jwtAppTokenGenerator(userInfo._id,payload.deviceType,payload.deviceToken);  
+        // let token =  await jwtAppTokenGenerator(userInfo._id,payload.deviceType,payload.deviceToken);  
       
         let user = {
           token:token,
@@ -113,8 +114,8 @@ exports.signinUser = async function (req, res) {
           deviceType: payload.deviceType,
         };
         let token = await sessionManager(sesssionData);
-        console.log(token,"token:123")
-         token =await  jwtAppTokenGenerator(userInfo._id,payload.deviceType,payload.deviceToken);  
+        // console.log(token,"token:123")
+        //  token =await  jwtAppTokenGenerator(userInfo._id,payload.deviceType,payload.deviceToken);  
 
   
         let user = {

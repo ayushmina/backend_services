@@ -3,8 +3,6 @@
 # Goal
  Google OAuth integration with NodeJS 
 
-
-
  # Prerequisites
  it is necessary to have:
 
@@ -15,7 +13,7 @@
 - Be able to build OAuth integrations 
 - install axios googleapis 
 
- dependencies  
+# Dependencies  
 
 "express": "^4.18.1",
 "googleapis": "^100.0.0",
@@ -58,7 +56,6 @@ app.use("/auth/googlr",router);
 
 
 ```
-- We will hit ~ {backendURL}/auth/google/google/url ~ in our application to initiate authentication flow in our application. This will initiate our twitter authentication by redirecting the user to twitter(If not already logged In).
 
 # generateAuthCodeUrl 
 it will redirect to google auth url  from that  you can log or sign in with google 
@@ -91,6 +88,7 @@ function getGoogleAuthURL() {
 2 redirect the user's browser to that URL
 3 Have a sip of coffee while the user logs in, chooses his Google account, and grants permission, until eventually ...
 4 The user's browser gets redirected back to your app's redirect_uri, with a query param of code which is the one-time Auth Code
+- We will hit ~ {backendURL}/auth/google/google/url ~ in our application to initiate authentication flow in our application. This will initiate our google authentication by redirecting the user to google(If not already logged In).
 
 # app's redirect_uri
 ```sh

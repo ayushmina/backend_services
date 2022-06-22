@@ -24,11 +24,20 @@ Before You Get Started
 To implement Github Auth we need to register a new application in Github OAuth Apps.
 
 Once you start the process you will get a form like this.
-![Alt text](https://res.cloudinary.com/dryfxhged/image/upload/v1654767386/ewebaexxug6v08nh0nex.png?raw=true "Title")
+![Alt text](https://res.cloudinary.com/dryfxhged/image/upload/v1655878927/x7aguys7qhjgw8flwgey.png "Title")
+![Alt text](https://res.cloudinary.com/dryfxhged/image/upload/v1655878928/lo8m4lphfegrkv2fzbhe.png "Title")
 
 You need to fill all the required details and put the Authorization callback URL as http://localhost:8080/auth/github/github/callback (This will be the URL on which Github will send the authorization code once authorization is finished)
 
 Once you register the application you will get the App's Client Id and Secret which we will use in our code.
+
+# save Credentials
+```sh
+  "githubKey":{
+   "GITHUB_CLIENT_ID": "bdaxxxxxxxxxxxf5a62ec89",
+   "GITHUB_CLIENT_SECRET":"d139xxxxxxxxxxxxxxxxxxx6e76f8d8795d1"
+  },
+```
 
 #  Routes Configuration
 
@@ -38,19 +47,12 @@ router.get("/github/callback", githubController.getGithubData)
 
 
 
-
 app.use("auth/github",githubRoutes);
 
 ```
 
 
-# save Credentials
-```sh
-  "githubKey":{
-   "GITHUB_CLIENT_ID": "bdaxxxxxxxxxxxf5a62ec89",
-   "GITHUB_CLIENT_SECRET":"d139xxxxxxxxxxxxxxxxxxx6e76f8d8795d1"
-  },
-```
+
 
 
 - Now that you have a Client Id and Client Secret, you can build a minimal Express API that redirects to GitHub to authorize your app:
@@ -90,7 +92,7 @@ getGithubData = async (req, res) => {
                     console.log(respose);
                 }
      
-        }
+        })
 }
    
 

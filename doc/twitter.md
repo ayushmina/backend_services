@@ -16,9 +16,9 @@ TWITTER OAUTH LOGIN WITH NODE.JS
  Using express as an example here, though you can use any other framework, the concept is the same.
 
  We need 4 useful modules from npm:
-- oauth for generating the request and access tokens for the OAuth flow, and for authenticating to any OAuth enable HTTP API (like Twitter)
+- "oauth" for generating the request and access tokens for the OAuth flow, and for authenticating to any OAuth enable HTTP API (like Twitter)
 - express as the web server
-- express-session , cookie-parser for handling the user sessions and cookies
+- "express-session" , "cookie-parse"r for handling the user sessions and cookies
 
 
 # The HTTP server and endpoints
@@ -45,15 +45,17 @@ The local HTTP server will listen on the port 3000 and serves the following rout
   ```
 #  Routes Configuration
 ```sh
-router.route("/authenticate").get(twitterController.authenticate);         //method for the OAuth flow initiation  by authenticate
-router.route("/authorize").get(twitterController.twitter("authorize"));   //method for the OAuth flow initiation by authorize
-router.route("/twitterCallback").get(twitterController.twitterCallback); //call back URL 
+router.route("/authenticate").get(twitterController.authenticate);    
+//method for the OAuth flow initiation  by authenticate
+router.route("/authorize").get(twitterController.twitter("authorize"));   
+//method for the OAuth flow initiation by authorize
+router.route("/twitterCallback").get(twitterController.twitterCallback); 
+//call back URL 
 
 app.use("/auth/twitter",router);
 
 
 ```
-- We will hit ~ {backendURL}/auth/twitter/authenticate ~ in our application to initiate authentication flow in our application. This will initiate our twitter authentication by redirecting the user to twitter(If not already logged In).
 
 # Step-by-step
 - We need to create an OAuth Consumer to generate the request, access token and make authorised requests to the Twitter API:
@@ -66,8 +68,8 @@ const oauthConsumer = new oauth.OAuth(
   '1.0A',
   'http://127.0.0.1:8080/auth/twitter/twitterCallback', 'HMAC-SHA1')
   ```
-
-- Set up routes for /twitter/logout, /twitter/authorize and /twitter/authenticate:
+- Set up routes for /twitter/logout, /twitter/authorize and /twitter/authenticate
+- We will hit ~ {backendURL}/auth/twitter/authenticate ~ in our application to initiate authentication flow in our application. This will initiate our twitter authentication by redirecting the user to twitter(If not already logged In).
 
 ```sh
 

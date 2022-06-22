@@ -36,26 +36,14 @@ exports.sendEmail =async (emailType, emailVariables, emailId) => {
  if(!emailTemp){
   return universalFunctions.sendError("emailTemplate is found add on db first/check email type ", res)
  }
- console.log(emailTemp,emailType,"nj")
-  switch (emailType) {
+  //console.log(emailTemp,emailType,"nj")
 
-
-    case "FORGOT_PASSWORD":
       mailOptions.subject = emailTemp.subject;
       mailOptions.html = renderMessageFromTemplateAndVariables(
         emailTemp.htmlBody,
         emailVariables
       );
-      break;
 
-    case "FEEDBACK":
-      mailOptions.subject = emailTemp.subject;
-      mailOptions.html = renderMessageFromTemplateAndVariables(
-        emailTemp.htmlBody,
-        emailVariables
-      );
-      break;
-  }
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (!error) {

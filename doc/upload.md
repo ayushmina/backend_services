@@ -61,7 +61,8 @@ multerFiles.array('file') // for upload multi file in local first
 ```
 Upload from a local path
 
-You can upload an asset by specifying the local path of a media file. This option is only available when using Cloudinary's SDKs. For example:
+- You can upload an asset by specifying the local path of a media file.
+ This option is only available when using Cloudinary's SDKs. For example:
 ```sh
 cloudinary.config({
   cloud_name: cloudinaryConfig.CLOUD_NAME,

@@ -17,20 +17,10 @@ admin.initializeApp({
 
 
 exports.sendPushNotifications=async (deviceToken,payload)=>{
-    //  deviceToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjI1ZmVmOGVmOTYyYTI3NjFjZDE5ZWIwIiwiZGV2aWNlVHlwZSI6IjIiLCJkZXZpY2VUb2tlbiI6IjU3NjI2NDVkNmNjNzI5MzYiLCJpYXQiOjE2NTQ4MzYyNTR9.Mdpn4ri6bqQBbGDhzsa03i8d7TKZwxmGoFdZWx0nSAs";
-    let deviceType="1"
-     payload = {
-        notification: {
-          type:"accept",
-          title: "this is title ",
-          body: "tis is message",
-          badge: "0",
-          deviceType:deviceType
-        },
-      };
-      let options = { priority: "high" };
+      
+     let options = { priority: "high" };
      
-      await admin
+     await admin
         .messaging()
         .sendToDevice(deviceToken, payload, options)
         .then(function (response) {

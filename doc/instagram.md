@@ -2,8 +2,8 @@
 
 
 # Goals
-we will integrate the Instagram basic display API on a Node.js GraphQL API.
-Without Passport
+We will integrate the Instagram basic display API on a Node.js GraphQL API.
+Without Passport js 
 
 # Prerequisites
  it is necessary to have:
@@ -13,11 +13,11 @@ Without Passport
 - Working knowledge of JavaScript
 - Facebook developer account
 # Creating a Facebook developer account
-To create a Facebook developer account, follow the following steps:
+ To create a Facebook developer account, follow the following steps:
 
-Visit the Facebook developer page and on the right side, click Login.
-In the resulting page, key in your credentials and click Log In.
-After signing in, you will be directed to your dashboard page.
+- Visit the Facebook developer page and on the right side, click Login.
+- In the resulting page, key in your credentials and click Log In.
+- After signing in, you will be directed to your dashboard page.
 # Creating an app
 
 ![Alt text](https://res.cloudinary.com/dryfxhged/image/upload/v1654750667/nwcp3lo7brft9sgdn8zd.png?raw=true "Title")
@@ -46,14 +46,26 @@ After signing in, you will be directed to your dashboard page.
 - Hurray!!, your Instagram app is now configured, it’s time to set up our project.
 # Getting the authorization code
 - For us to use the API, the first step is to get the authorization code. It provides an authentication mechanism to the Instagram API.
-
+# Save Credentials
 ```sh
   "instagramKey":{
      "CLIENTID":"4xxxxxxxxxxx4",
      "client_secret":"b7xxxxxxxxxbe3"
    }
 ```
+# Routes Configuration
+```sh
+router.route("/instagram/url").get(instagramController.getInstagramAuthURL); //get 
+router.route("/instagram").get(instagramController.redirectUriRoutes); //callback routes
+
+app.use("/auth/instgram",router);
+
+
+```
+
+
 # How Instagram authentication works?
+- We will hit ~ {backendURL}/auth/instagram//instagram/url ~ in our application to initiate authentication flow in our application. This will initiate our Instagram authentication by redirecting the user to Instagram(If not already logged In).
 - Lets figure out how Instagram authentication works. On your page you have a Login button which redirects you to the Instagram login page at the url:
 ```sh
   var url =`https://api.instagram.com/oauth/authorize?client_id=`
@@ -140,16 +152,7 @@ const  getUserPostMedia= async (access_token)=> {
 }
 
 ```
-# Routes Configuration
-```sh
-router.route("/instagram/url").get(instagramController.getInstagramAuthURL); //get 
-router.route("/instagram").get(instagramController.redirectUriRoutes); //callback routes
 
-app.use("/auth/instgram",router);
-
-
-```
-- We will hit ~ {backendURL}/auth/instagram//instagram/url ~ in our application to initiate authentication flow in our application. This will initiate our Instagram authentication by redirecting the user to Instagram(If not already logged In).
 
 
 To get a long-lived access token, we will follow the following steps:
