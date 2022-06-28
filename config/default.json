@@ -5,7 +5,7 @@
       "filename": "app.log"
     },
     "db": {
-      "databaseUrl": "mongodb+srv://ayushmeena:ayushmeena@cluster0.h8xj46a.mongodb.net/?retryWrites=true&w=majority",
+      "databaseUrl": "mongodb+srv://ayushmeenaxxxxxxxxxxxxxxxxxxxxxxxxx.mongodb.net/?retryWrites=true&w=majority",
       "firebaseDatabaseUrl": ""
     }
   
