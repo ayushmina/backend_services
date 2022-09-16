@@ -4,7 +4,7 @@ Built and deployed a reusable server-based Node.js working software
 # Backend as a Service Features
 - Data Management
 - APIs (REST )
-- File Storage(AWS,Cloudinary,server)
+- File Storage(AWS(S3),Cloudinary,server)
 - Databases
 - Email Notifications
 - Push Notifications
